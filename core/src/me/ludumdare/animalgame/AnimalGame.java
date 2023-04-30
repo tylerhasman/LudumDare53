@@ -47,8 +47,8 @@ public class AnimalGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		world.update(Gdx.graphics.getDeltaTime());
-
-		ScreenUtils.clear(1, 0, 0, 1);
+		
+		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 		world.render(batch);
 		shop.render(batch);
