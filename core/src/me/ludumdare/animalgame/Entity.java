@@ -11,10 +11,21 @@ public abstract class Entity {
 
     private final Vector2 position;
 
+    private float radius;
+
     public Entity(World world){
         this.world = world;
         removed = false;
         position = new Vector2();
+        radius = 1;
+    }
+
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
+    public float getRadius() {
+        return radius;
     }
 
     public World getWorld() {

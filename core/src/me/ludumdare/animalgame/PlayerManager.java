@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PlayerManager {
+
     private Shop shop;
     private int health;
     private int score;
     private int money;
     private int currentLevel;
+
     public PlayerManager() {
         money = 20;
         score = 0;
@@ -40,6 +42,8 @@ public class PlayerManager {
         font.draw(spriteBatch, String.valueOf(money), Gdx.graphics.getWidth() - moneyTextWidth - 10, Gdx.graphics.getHeight());
     }
 
-
+    public void damage(int amount){
+        health -= amount;
+    }
 
 }
