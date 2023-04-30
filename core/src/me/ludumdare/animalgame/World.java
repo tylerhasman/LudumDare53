@@ -50,7 +50,7 @@ public class World {
         List<T> found = new ArrayList<>();
 
         for(Entity entity : entities){
-            if(entityClass.isInstance(entity)){
+            if(Utils.isInstanceOf(entityClass, entity)){
                 found.add((T) entity);
             }
         }
