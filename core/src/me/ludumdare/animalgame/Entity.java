@@ -17,6 +17,10 @@ public abstract class Entity {
         position = new Vector2();
     }
 
+    public World getWorld() {
+        return world;
+    }
+
     public Vector2 getPosition() {
         return position;
     }
