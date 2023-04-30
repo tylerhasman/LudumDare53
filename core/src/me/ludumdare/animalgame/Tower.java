@@ -1,5 +1,6 @@
 package me.ludumdare.animalgame;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public abstract class Tower extends Entity {
     private float attackRange;
     private float attackSpeed;
     private float attackTimer;
+    private int price;
 
     public Tower(World world) {
         super(world);
@@ -18,6 +20,7 @@ public abstract class Tower extends Entity {
         radius = 1f;
         attackRange = 5f;
         attackTimer = 0f;
+        price = 10;
     }
 
     public void setAttackRange(float attackRange) {
@@ -28,11 +31,16 @@ public abstract class Tower extends Entity {
         return radius;
     }
 
+    public int getPrice() { return price; }
+
     public void setAttackSpeed(float attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
     public abstract void attack(Enemy enemy);
+
+    public abstract String getName();
+    public abstract Texture getTexture();
 
     @Override
     public void update(float delta) {

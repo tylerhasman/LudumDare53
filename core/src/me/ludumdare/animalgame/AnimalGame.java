@@ -17,6 +17,10 @@ public class AnimalGame extends ApplicationAdapter {
 
 	private World world;
 
+	private Shop shop;
+
+	private PlayerManager playerManager;
+
 	private Map<String, Texture> textures;
 
 	@Override
@@ -24,11 +28,13 @@ public class AnimalGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		world = new World();
 		textures = new HashMap<>();
-
 		instance = this;
 
 		textures.put("cat_walk_0", new Texture("cat walk 0.png"));
 		textures.put("cat_walk_1", new Texture("cat walk 1.png"));
+
+		playerManager = new PlayerManager();
+		shop  = new Shop(world, playerManager);
 	}
 
 	public static Texture getTexture(String textureName){
@@ -46,6 +52,8 @@ public class AnimalGame extends ApplicationAdapter {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
 		world.render(batch);
+		shop.render(batch);
+		playerManager.render(batch);
 		batch.end();
 	}
 	
