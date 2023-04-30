@@ -2,9 +2,12 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +26,8 @@ public class AnimalGame extends ApplicationAdapter {
 
 	private Map<String, Texture> textures;
 
+	private OrthographicCamera camera;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -30,10 +35,23 @@ public class AnimalGame extends ApplicationAdapter {
 		textures = new HashMap<>();
 		instance = this;
 
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.setToOrtho(false);
+
 		loadTextures();
 
 		playerManager = new PlayerManager();
 		shop  = new Shop(world, playerManager);
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+		camera.setToOrtho(false);
+
 	}
 
 	public static Texture getTexture(String textureName){
@@ -53,10 +71,14 @@ public class AnimalGame extends ApplicationAdapter {
 		world.update(Gdx.graphics.getDeltaTime());
 		
 		ScreenUtils.clear(0, 0, 0, 1);
+
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+
 		world.render(batch);
 		shop.render(batch);
 		playerManager.render(batch);
+
 		batch.end();
 	}
 	
