@@ -29,7 +29,6 @@ public class Shop {
         towers[1][0] = new DummyTower(world);
         towers[1][1] = new DummyTower(world);
 
-
     }
 
     public void buyTower(Tower tower) {
@@ -51,11 +50,14 @@ public class Shop {
         int towersNumCols = towers[1].length;
 
         BitmapFont font = new BitmapFont();
-        final float width = 50, height = 50;
+        final float width = 64, height = 64;
         Rectangle shopBounds = new Rectangle(Gdx.graphics.getWidth() - 2 * width, 0, towersNumCols * width, towersNumRows * height);
         for (int i = 0; i < towersNumRows; i++) {
             for (int j = 0; j < towersNumCols; j++) {
                 Tower tower = towers[i][j];
+
+                tower.setRadius(width);
+
                 Rectangle towerBounds = new Rectangle(Gdx.graphics.getWidth() - (2 - i) * width, 0 + j * height, width, height);
                 spriteBatch.draw(tower.getTexture(), Gdx.graphics.getWidth() - (2 - i) * width, 0 + j * height, width, height);
                 font.draw(spriteBatch, String.valueOf(tower.getPrice()), Gdx.graphics.getWidth() - (2 - i) * width, 20 + j * height);

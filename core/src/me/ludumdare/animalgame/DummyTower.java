@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DummyTower extends Tower{
 
     public DummyTower(World world) {
-        super(world, "Dummy", "cat_walk_0");
+        super(world, "Dummy", "mailman_walk_1");
     }
 
     @Override
