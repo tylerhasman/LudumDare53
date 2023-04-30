@@ -16,6 +16,11 @@ public class World {
         toAdd = new ArrayList<>();
     }
 
+    public boolean isTowerPlaceable(Vector2 position, float towerSize){
+        //TODO: IMPLEMENT
+        return true;
+    }
+
     public void addEntity(Entity entity){
         toAdd.add(entity);
     }
