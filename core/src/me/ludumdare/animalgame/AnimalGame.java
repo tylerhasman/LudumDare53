@@ -48,8 +48,11 @@ public class AnimalGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		world.update(Gdx.graphics.getDeltaTime());
-
+		Texture background = new Texture("lvl1.png");
 		ScreenUtils.clear(1, 0, 0, 1);
+		batch.begin();
+		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		batch.end();
 		batch.begin();
 		world.render(batch);
 		shop.render(batch);
