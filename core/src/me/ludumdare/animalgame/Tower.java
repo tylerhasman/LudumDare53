@@ -1,34 +1,33 @@
 package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
 
 public abstract class Tower extends Entity {
 
-    private float radius;
-
     private float attackRange;
     private float attackSpeed;
     private float attackTimer;
     private int price;
 
-    public Tower(World world) {
+    private final String towerName;
+    private final String towerTexture;
+
+    public Tower(World world, String towerName, String towerTexture) {
         super(world);
         attackSpeed = 1f;
-        radius = 1f;
         attackRange = 5f;
         attackTimer = 0f;
         price = 10;
+        this.towerName = towerName;
+        this.towerTexture = towerTexture;
     }
 
     public void setAttackRange(float attackRange) {
         this.attackRange = attackRange;
-    }
-
-    public float getRadius() {
-        return radius;
     }
 
     public int getPrice() { return price; }
@@ -39,8 +38,22 @@ public abstract class Tower extends Entity {
 
     public abstract void attack(Enemy enemy);
 
-    public abstract String getName();
-    public abstract Texture getTexture();
+    public String getName(){
+        return towerName;
+    }
+
+    public Texture getTexture(){
+        return AnimalGame.getTexture(towerTexture);
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+        super.render(spriteBatch);
+
+        Texture texture = getTexture();
+
+        spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 50, getRadius() * 50);
+    }
 
     @Override
     public void update(float delta) {
@@ -51,7 +64,7 @@ public abstract class Tower extends Entity {
         if(attackTimer <= 0){
             attackTimer = 0;
 
-            List<Entity> nearby = getWorld().getCollidingEntities(getPosition(), attackRange + radius);
+            List<Entity> nearby = getWorld().getCollidingEntities(getPosition(), attackRange + getRadius());
 
             for(Entity entity : nearby){
                 if(entity instanceof Enemy){

@@ -45,6 +45,10 @@ public class AnimalGame extends ApplicationAdapter {
 		return instance;
 	}
 
+	public PlayerManager getPlayerManager() {
+		return playerManager;
+	}
+
 	@Override
 	public void render () {
 		world.update(Gdx.graphics.getDeltaTime());

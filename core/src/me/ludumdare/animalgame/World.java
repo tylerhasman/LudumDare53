@@ -33,11 +33,10 @@ public class World {
     public List<Entity> getCollidingEntities(Vector2 position, float radius){
         List<Entity> colliding = new ArrayList<>();
 
-        final float radiusSquared = radius * radius;
-
         //This is slow but can be optimized later if needed
         for(Entity entity : entities){
-            if(entity.getPosition().dst2(position) <= radiusSquared){
+            //We do all this squaring to avoid calling sqrt which is actually quite expensive!!
+            if(entity.getPosition().dst2(position) <= (radius + entity.getRadius()) * (radius + entity.getRadius())){
                 colliding.add(entity);
             }
         }

@@ -7,12 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * This tower does nothing. It is just meant for testing.
  */
 public class DummyTower extends Tower{
-    public String name;
-    public Texture texture;
+
     public DummyTower(World world) {
-        super(world);
-        name = "Dummy";
-        texture = AnimalGame.getTexture("cat_walk_0");
+        super(world, "Dummy", "cat_walk_0");
     }
 
     @Override
@@ -20,15 +17,4 @@ public class DummyTower extends Tower{
 
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-        super.render(spriteBatch);
-
-        Texture texture = AnimalGame.getTexture("cat_walk_0");
-
-        spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 50, getRadius() * 50);
-    }
-
-    public String getName() { return name;}
-    public Texture getTexture() { return texture;}
 }
