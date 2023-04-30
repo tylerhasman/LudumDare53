@@ -1,6 +1,7 @@
 package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
 
@@ -8,9 +9,16 @@ public abstract class Entity {
 
     private boolean removed;
 
+    private final Vector2 position;
+
     public Entity(World world){
         this.world = world;
         removed = false;
+        position = new Vector2();
+    }
+
+    public Vector2 getPosition() {
+        return position;
     }
 
     public void remove(){
