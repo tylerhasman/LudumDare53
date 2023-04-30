@@ -17,7 +17,7 @@ public abstract class Entity {
         this.world = world;
         removed = false;
         position = new Vector2();
-        radius = 1;
+        radius = 64;
     }
 
     public void setRadius(float radius) {

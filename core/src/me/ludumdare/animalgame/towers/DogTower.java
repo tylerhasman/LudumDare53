@@ -15,7 +15,7 @@ public class DogTower extends ProjectileTower {
         Projectile projectile = new Projectile(getWorld(), "tennis_ball");
 
         projectile.setDamage(1);
-        projectile.setRadius(0.25f);
+        projectile.setRadius(16);
 
         return projectile;
     }
