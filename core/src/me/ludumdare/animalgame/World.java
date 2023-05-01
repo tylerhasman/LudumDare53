@@ -99,7 +99,9 @@ public class World {
         spawnEnemyTimer -= delta;
         if(spawnEnemyTimer <= 0){
             spawnEnemyTimer = SPAWNTIMER;
-            enemies.add(toAddEnemies.remove(0));
+            if (!toAddEnemies.isEmpty()) {
+                enemies.add(toAddEnemies.remove(0));
+            }
         }
         enemies.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
     }
@@ -109,7 +111,9 @@ public class World {
         spawnWaveTimer -= delta;
         if (spawnWaveTimer <= 0) {
             spawnWaveTimer = WAVETIMER;
-            toAddEnemies.addAll(enemyWaves.remove(0));
+            if (!enemyWaves.isEmpty()) {
+                toAddEnemies.addAll(enemyWaves.remove(0));
+            }
         }
     }
 
