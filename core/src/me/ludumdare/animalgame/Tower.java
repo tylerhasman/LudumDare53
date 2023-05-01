@@ -84,13 +84,26 @@ public abstract class Tower extends Entity {
     }
 
     @Override
+    public void preRender(SpriteBatch spriteBatch) {
+        super.preRender(spriteBatch);
+
+        Texture texture = getTexture();
+
+        if(texture != null){
+            spriteBatch.setColor(0, 0, 0, 0.2f);
+            spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius() * 0.85f, getRadius() * 2, 60);
+            spriteBatch.setColor(1, 1, 1, 1);
+        }
+    }
+
+    @Override
     public void render(SpriteBatch spriteBatch) {
         super.render(spriteBatch);
 
         Texture texture = getTexture();
 
         if(texture != null){
-            spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 2, getRadius() * 2);
+            spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius() , getRadius() * 2, getRadius() * 2);
         }
     }
 

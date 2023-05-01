@@ -104,6 +104,9 @@ public class World {
 
     public void render(SpriteBatch spriteBatch){
         for(Entity entity : entities){
+            entity.preRender(spriteBatch);
+        }
+        for(Entity entity : entities){
             entity.render(spriteBatch);
         }
     }

@@ -135,6 +135,25 @@ public class Enemy extends Entity {
     }
 
     @Override
+    public void preRender(SpriteBatch spriteBatch) {
+        super.preRender(spriteBatch);
+
+        Texture texture;
+
+        if(isDead()){
+            texture = AnimalGame.getTexture(enemyAppearance.deathTexture);
+        }else{
+            texture = AnimalGame.getTexture(enemyAppearance.walkTextures[currentFrame]);
+        }
+
+        if(texture != null){
+            spriteBatch.setColor(0, 0, 0, 0.2f);
+            spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius() * 0.85f, getRadius() * 2, 60);
+            spriteBatch.setColor(1, 1, 1, 1);
+        }
+    }
+
+    @Override
     public void render(SpriteBatch spriteBatch) {
         super.render(spriteBatch);
 

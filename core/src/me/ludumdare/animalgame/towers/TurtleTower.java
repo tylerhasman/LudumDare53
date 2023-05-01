@@ -31,11 +31,17 @@ public class TurtleTower extends ProjectileTower {
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    public void preRender(SpriteBatch spriteBatch) {
+        if(!hidden){
+            super.preRender(spriteBatch);
+        }
         Texture texture = AnimalGame.getTexture("turtle_nest");
 
         spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 2, getRadius() * 2);
+    }
 
+    @Override
+    public void render(SpriteBatch spriteBatch) {
         if(!hidden){
             super.render(spriteBatch);
         }
