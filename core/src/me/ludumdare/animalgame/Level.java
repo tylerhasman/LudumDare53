@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Level {
 
@@ -42,19 +40,8 @@ public class Level {
     public String getInvalidMap() {
         return invalidMap;
     }
-
-    private void spawnNextWave(List<List<Enemy>> _waveList) {
-        //TODO: put this in an update function?
-        if ((_waveList.size() > 0) && (_waveList != null)) {
-
-        }
-    }
-
-    private void spawnWave(List<Enemy> wave) {
-        //TODO
-        for (Enemy enemy: wave) {
-
-        }
+    public List<List<Enemy>> getWaveList() {
+        return this.waveList;
     }
 
     public boolean isValidTowerPlacement(Vector2 cursorPosition, Tower tower) {
