@@ -145,11 +145,17 @@ public class Levels {
                         new Vector2(1180, Y));
 
         List<String> threeWave4 = new ArrayList<>();
+        threeWave4.add(stork);
+        threeWave4.add(pigeon);
+        threeWave4.add(stork);
+        threeWave4.add(pigeon);
+        threeWave4.add(stork);
         List<String> threeWave5 = new ArrayList<>();
-        List<String> threeWave6 = new ArrayList<>();
-        List<String> threeWave7 = new ArrayList<>();
-        List<String> threeWave8 = new ArrayList<>();
-        List<String> threeWave9 = new ArrayList<>();
+        threeWave5.add(mailman);
+        threeWave5.add(mailman);
+        threeWave5.add(stork);
+        threeWave5.add(pigeon);
+        threeWave5.add(stork);
         List<String> threeWave10 = new ArrayList<>();
         threeWave10.add(santa);
         threeWave10.add(santa);
@@ -162,10 +168,10 @@ public class Levels {
         level3Enemies.add(twoWave7); //reusing waves
         level3Enemies.add(threeWave4);
         level3Enemies.add(threeWave5);
-        level3Enemies.add(threeWave6);
-        level3Enemies.add(threeWave7);
-        level3Enemies.add(threeWave8);
-        level3Enemies.add(threeWave9);
+        level3Enemies.add(twoWave8); //reusing waves
+        level3Enemies.add(twoWave9); //reusing waves
+        level3Enemies.add(threeWave5); //reusing waves
+        level3Enemies.add(twoWave8); //reusing waves
         level3Enemies.add(threeWave10);
 
         LEVEL_THREE = new Level(level3Points, "level3", "level3_invalid", level3Enemies);
