@@ -33,6 +33,8 @@ public class Enemy extends Entity {
 
     private float deathFade;
 
+    private boolean deadEnemy;
+
     private float showDamageTimer;
 
     public Enemy(World world, int health, int value, EnemyAppearance enemyAppearance, List<Vector2> path) {
@@ -48,6 +50,7 @@ public class Enemy extends Entity {
         frameSpeed = 0.5f;
         frameTimer = frameSpeed;
         deathFade = DEATH_FADE_TIME;
+        deadEnemy = false;
         showDamageTimer = 0;
     }
 
@@ -112,9 +115,12 @@ public class Enemy extends Entity {
         if(!isDead()){
             doPathing(delta);
             doAnimations(delta);
-        }else{
-            AnimalGame.getInstance().getPlayerManager().earnMoney(value);
-            AnimalGame.getInstance().getPlayerManager().increaseScore(value);
+        } else{
+            if (!deadEnemy) {
+                deadEnemy = true;
+                AnimalGame.getInstance().getPlayerManager().earnMoney(value);
+                AnimalGame.getInstance().getPlayerManager().increaseScore(value);
+            }
             deathFade -= delta;
             if(deathFade <= 0f){
                 remove();

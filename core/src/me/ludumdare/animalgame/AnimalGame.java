@@ -147,6 +147,11 @@ public class AnimalGame extends ApplicationAdapter {
 		textures.put("level2", new Texture("images/lvl2.png"));
 		textures.put("level2_invalid", new Texture("images/lvl2invalid.png"));
 
+		textures.put("shop_tray", new Texture("images/Shop Tray.png"));
+		textures.put("brown_1", new Texture("images/brown1.png"));
+		textures.put("brown_2", new Texture("images/brown2.png"));
+
+		textures.put("range", new Texture("images/range.png"));
 
 	}
 }

@@ -41,6 +41,10 @@ public abstract class Tower extends Entity {
         }
     }
 
+    public float getAttackRange() {
+        return attackRange;
+    }
+
     public void setAttackRange(float attackRange) {
         this.attackRange = attackRange;
     }
