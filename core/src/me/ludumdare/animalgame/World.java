@@ -11,7 +11,7 @@ public class World {
 
     private List<Entity> entities, toAdd;
     private List<List<Enemy>> enemyWaves;
-    private List<Enemy> enemies, toAddEnemies;
+    private List<Enemy> toAddEnemies;
 
     //DEBUG
 
@@ -26,7 +26,6 @@ public class World {
         entities = new ArrayList<>();
         toAdd = new ArrayList<>();
         enemyWaves = new ArrayList<>();
-        enemies = new ArrayList<>();
         toAddEnemies = new ArrayList<>();
     }
 
@@ -48,7 +47,7 @@ public class World {
 
     public List<Entity> getEntities() {
             return entities;
-        }
+    }
 
     /**
      * Get a list of entities that are colliding with a circle.
@@ -85,25 +84,30 @@ public class World {
     }
 
     public void update(float delta){
-        //spawnEntity(delta);
+        //HERE
+        entities.addAll(toAdd);
+        toAdd.clear();
+
+        for(Entity entity : entities){
+            entity.update(delta);
+        }
+
+        entities.removeIf(Entity::isRemoved);
+        entities.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
+        //HERE DO NOT TOUCH NO EXCEPTIONS
+
         spawnWaves(delta);
         spawnEnemy(delta);
     }
 
     private void spawnEnemy(float delta) {
-        for(Enemy enemy : enemies){
-            enemy.update(delta);
-        }
-        enemies.removeIf(Entity::isRemoved);
-
         spawnEnemyTimer -= delta;
         if(spawnEnemyTimer <= 0){
             spawnEnemyTimer = SPAWNTIMER;
             if (!toAddEnemies.isEmpty()) {
-                enemies.add(toAddEnemies.remove(0));
+                entities.add(toAddEnemies.remove(0));
             }
         }
-        enemies.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
     }
 
     private void spawnWaves(float delta) {
@@ -117,15 +121,8 @@ public class World {
         }
     }
 
-    private void spawnEntity(float delta) {
-        entities.addAll(toAdd);
-        toAdd.clear();
+/*    private void spawnEntity(float delta) {
 
-        for(Entity entity : entities){
-            entity.update(delta);
-        }
-
-        entities.removeIf(Entity::isRemoved);
 
         spawnEnemyTimer -= delta;
         if(spawnEnemyTimer <= 0){
@@ -134,13 +131,14 @@ public class World {
             List<Vector2> path = new ArrayList<>();
             path.add(new Vector2(Gdx.graphics.getWidth()-50,100));
 
-            Enemy enemy = new Enemy(this, 20, 20, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), path);
+            Enemy enemy = AnimalGame.createEnemy(this, "pigeon", path);
             enemy.getPosition().set(50, 50);
-            entities.add(enemy);
+            addEntity(enemy);
         }
 
-        entities.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
-    }
+        // Wave - list of enemy types
+
+    }*/
 
     public void render(SpriteBatch spriteBatch){
         for(Entity entity : entities){
@@ -148,12 +146,6 @@ public class World {
         }
         for(Entity entity : entities){
             entity.render(spriteBatch);
-        }
-        for(Enemy enemy : enemies){
-            enemy.preRender(spriteBatch);
-        }
-        for(Enemy enemy : enemies){
-            enemy.render(spriteBatch);
         }
     }
 
