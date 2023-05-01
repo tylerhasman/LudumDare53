@@ -1,21 +1,52 @@
 package me.ludumdare.animalgame.towers;
 
-import me.ludumdare.animalgame.Projectile;
-import me.ludumdare.animalgame.ProjectileTower;
-import me.ludumdare.animalgame.World;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import me.ludumdare.animalgame.*;
+import me.ludumdare.animalgame.projectiles.TurtleProjectile;
 
 public class TurtleTower extends ProjectileTower {
 
+    private static final TowerAppearance APPEARANCE =
+            new TowerAppearance(new String[] {"turtle_idle_0", "turtle_idle_1"}, new String[] {"turtle_attack_0", "turtle_attack_1"});
+
+    private boolean hidden;
+
     public TurtleTower(World world) {
-        super(world, "Turtle", "dog_idle_0", 50);
+        super(world, "Turtle", APPEARANCE, 50);
+        setProjectileSpeed(400f);
+        setAttackRange(1000);
+        setAttackSpeed(5);
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    @Override
+    public void update(float delta) {
+        if(!hidden){
+            super.update(delta);
+        }
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+        Texture texture = AnimalGame.getTexture("turtle_nest");
+
+        spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 2, getRadius() * 2);
+
+        if(!hidden){
+            super.render(spriteBatch);
+        }
     }
 
     @Override
     public Projectile createProjectile() {
-        Projectile projectile = new Projectile(getWorld(), "tennis_ball");
+        Projectile projectile = new TurtleProjectile(getWorld(), this);
 
         projectile.setDamage(1);
-        projectile.setRadius(16);
+        projectile.setRadius(getRadius() * 0.8f);
 
         return projectile;
     }

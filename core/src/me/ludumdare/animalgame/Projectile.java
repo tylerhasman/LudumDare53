@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Projectile extends Entity{
@@ -14,12 +15,18 @@ public class Projectile extends Entity{
 
     private String texture;
 
+    private boolean removeOnDamage;
+
+    private List<Enemy> inside;
+
     public Projectile(World world, String texture) {
         super(world);
         velocity = new Vector2();
         hitboxRadius = 0.1f;
         damage = 1;
         this.texture = texture;
+        removeOnDamage = true;
+        inside = new ArrayList<>();
     }
 
     public void setDamage(int damage) {
@@ -30,21 +37,38 @@ public class Projectile extends Entity{
         this.velocity.set(velocity);
     }
 
+    public void setRemoveOnDamage(boolean removeOnDamage) {
+        this.removeOnDamage = removeOnDamage;
+    }
+
+    public Vector2 getVelocity() {
+        return velocity;
+    }
+
     @Override
     public void update(float delta) {
         super.update(delta);
 
         getPosition().add(velocity.x * delta, velocity.y * delta);
 
+        inside.removeIf(enemy -> enemy.getPosition().dst2(getPosition()) > (getRadius() + hitboxRadius) * (getRadius() + hitboxRadius));
+
         List<Entity> nearbyEntities = getWorld().getCollidingEntities(getPosition(), getRadius() + hitboxRadius);
 
         for(Entity nearby : nearbyEntities){
             if(nearby instanceof Enemy){
                 Enemy enemy = (Enemy) nearby;
-
+                //Prevents things from the turtle shell from double hitting something until it leaves it
+                if(inside.contains(enemy)){
+                    continue;
+                }
                 enemy.damage(damage);
 
-                remove();
+                if(removeOnDamage){
+                    remove();
+                }else{
+                    inside.add(enemy);
+                }
 
                 break;
             }

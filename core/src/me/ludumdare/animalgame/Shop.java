@@ -52,17 +52,21 @@ public class Shop {
         int towersNumCols = towers[1].length;
 
         BitmapFont font = new BitmapFont();
-        final float width = 64, height = 64;
-        Rectangle shopBounds = new Rectangle(Gdx.graphics.getWidth() - 2 * width, 0, towersNumCols * width, towersNumRows * height);
+        final float width = 96, height = 96;
+        Rectangle shopBounds = new Rectangle(Gdx.graphics.getWidth() - 200, 0, 200, 800);
+        spriteBatch.draw(AnimalGame.getTexture("shop_tray"),Gdx.graphics.getWidth() - 200,0,200,800);
+        spriteBatch.draw(AnimalGame.getTexture("brown_2"), Gdx.graphics.getWidth() - 200, 100, 200, Gdx.graphics.getHeight() - 245);
         for (int i = 0; i < towersNumRows; i++) {
             for (int j = 0; j < towersNumCols; j++) {
                 Tower tower = towers[i][j];
 
                 tower.setRadius(width);
 
-                Rectangle towerBounds = new Rectangle(Gdx.graphics.getWidth() - (2 - i) * width, 0 + j * height, width, height);
-                spriteBatch.draw(tower.getTexture(), Gdx.graphics.getWidth() - (2 - i) * width, 0 + j * height, width, height);
-                font.draw(spriteBatch, String.valueOf(tower.getPrice()), Gdx.graphics.getWidth() - (2 - i) * width, 20 + j * height);
+                Rectangle towerBounds = new Rectangle(Gdx.graphics.getWidth() - (2 - i) * width + 5, Gdx.graphics.getHeight() - (j+1) * height - 150 - 5, width, height);
+
+                spriteBatch.draw(AnimalGame.getTexture("brown_1"), Gdx.graphics.getWidth() - (2 - i) * width, Gdx.graphics.getHeight() - (j+1) * height - 150, width-4, height-4);
+                spriteBatch.draw(tower.getTexture(), Gdx.graphics.getWidth() - (2 - i) * width, Gdx.graphics.getHeight() - (j+1) * height - 150, width, height);
+                font.draw(spriteBatch, String.valueOf(tower.getPrice()), Gdx.graphics.getWidth() - (2 - i) * width + 5, 20 + Gdx.graphics.getHeight() - (j+1) * height - 150);
 
 
                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
@@ -96,7 +100,9 @@ public class Shop {
                 }
 
                 if (towerClicked) {
-                    spriteBatch.draw(currClickedTower.getTexture(), Gdx.input.getX() - 25, Gdx.graphics.getHeight() - Gdx.input.getY() - 25, 50, 50);
+                    spriteBatch.draw(currClickedTower.getTexture(), Gdx.input.getX() - width / 2, Gdx.graphics.getHeight() - Gdx.input.getY() - height / 2, width, height);
+                    float range = currClickedTower.getAttackRange();
+                    spriteBatch.draw(AnimalGame.getTexture("range"), Gdx.input.getX() - range, Gdx.graphics.getHeight() - Gdx.input.getY() - range, range * 2, range * 2);
                 }
 
                 if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
@@ -105,7 +111,6 @@ public class Shop {
                 }
             }
         }
-        font.draw(spriteBatch, "SHOP", Gdx.graphics.getWidth() - ((towersNumRows + 1) * width) / 2, towersNumCols * height + font.getLineHeight());
 //        spriteBatch.draw(AnimalGame.getTexture("cat_walk_0"), Gdx.graphics.getWidth() - 50,0,50,50);
 
     }
