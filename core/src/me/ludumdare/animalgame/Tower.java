@@ -16,12 +16,12 @@ public abstract class Tower extends Entity {
     private final String towerName;
     private final String towerTexture;
 
-    public Tower(World world, String towerName, String towerTexture) {
+    public Tower(World world, String towerName, String towerTexture, int price) {
         super(world);
         attackSpeed = 1f;
         attackRange = 5f;
         attackTimer = 0f;
-        price = 10;
+        this.price  = price;
         this.towerName = towerName;
         this.towerTexture = towerTexture;
     }
@@ -45,6 +45,8 @@ public abstract class Tower extends Entity {
     public Texture getTexture(){
         return AnimalGame.getTexture(towerTexture);
     }
+
+    public String getTextureName() { return towerTexture; }
 
     @Override
     public void render(SpriteBatch spriteBatch) {

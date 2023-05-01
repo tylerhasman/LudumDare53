@@ -6,8 +6,8 @@ public abstract class ProjectileTower extends Tower {
 
     private float projectileSpeed;
 
-    public ProjectileTower(World world, String towerName, String towerTexture) {
-        super(world, towerName, towerTexture);
+    public ProjectileTower(World world, String towerName, String towerTexture, int price) {
+        super(world, towerName, towerTexture, price);
         projectileSpeed = 5f;
     }
 

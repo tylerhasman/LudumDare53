@@ -23,16 +23,19 @@ public class Enemy extends Entity {
      */
     private int damage;
 
+    private int value;
+
     private EnemyAppearance enemyAppearance;
     private int currentFrame;
     private float frameTimer, frameSpeed;
 
     private float deathFade;
 
-    public Enemy(World world, int health, EnemyAppearance enemyAppearance, List<Vector2> path) {
+    public Enemy(World world, int health, int value, EnemyAppearance enemyAppearance, List<Vector2> path) {
         super(world);
         this.health = health;
         this.path = path;
+        this.value= value;
         currentPathIndex = 0;
         speed = 1;
         damage = 1;
@@ -104,6 +107,8 @@ public class Enemy extends Entity {
             doPathing(delta);
             doAnimations(delta);
         }else{
+            AnimalGame.getInstance().getPlayerManager().earnMoney(value);
+            AnimalGame.getInstance().getPlayerManager().increaseScore(value);
             deathFade -= delta;
             if(deathFade <= 0f){
                 remove();
