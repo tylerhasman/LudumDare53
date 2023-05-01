@@ -25,11 +25,6 @@ public class World {
         entities.add(enemy);
     }
 
-    public boolean isTowerPlaceable(Vector2 position, float towerSize){
-        //TODO: IMPLEMENT
-        return true;
-    }
-
     public void addEntity(Entity entity){
         toAdd.add(entity);
     }
