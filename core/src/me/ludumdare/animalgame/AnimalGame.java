@@ -45,7 +45,12 @@ public class AnimalGame extends ApplicationAdapter {
 		shop  = new Shop(world);
 
 		switchLevels(0);
+		setSpawnWaves(this.level.getWaveList());
 
+	}
+
+	private void setSpawnWaves(List<List<Enemy>> _waveList) {
+		this.world.setWaves(_waveList);
 	}
 
 	public void switchLevels(int levelNumber){
