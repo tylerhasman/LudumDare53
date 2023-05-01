@@ -100,6 +100,8 @@ public class World {
             enemy.getPosition().set(50,100);
             entities.add(enemy);
         }
+
+        entities.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
     }
 
     public void render(SpriteBatch spriteBatch){
