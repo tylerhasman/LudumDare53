@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("AnimalGame");
-		config.setWindowedMode(1280, 800);
+		config.setWindowedMode(1480, 800);
 		config.setResizable(false);
 		new Lwjgl3Application(new AnimalGame(), config);
 	}
