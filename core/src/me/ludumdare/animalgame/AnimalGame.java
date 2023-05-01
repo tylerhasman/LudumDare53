@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 
 public class AnimalGame extends ApplicationAdapter {
@@ -27,6 +30,8 @@ public class AnimalGame extends ApplicationAdapter {
 
 	private Map<String, Texture> textures;
 
+	private Map<String, EnemyData> enemyData;
+
 	private OrthographicCamera camera;
 
 	@Override
@@ -36,8 +41,18 @@ public class AnimalGame extends ApplicationAdapter {
 		textures = new HashMap<>();
 		instance = this;
 
+		enemyData = new HashMap<>();
+
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
+
+		enemyData = new HashMap<>();
+
+		enemyData.put("azazon", new EnemyData(50, 10, new EnemyAppearance(new String[] {"azazon_walk_1", "azazon_walk_2"}, "azazon_death"), 20, 40, "mail_man", 3));
+		enemyData.put("mail_man", new EnemyData(5, 3, new EnemyAppearance(new String[] {"mailman_walk_1", "mailman_walk_2"}, "mailman_death"), 5, 60, "pigeon", 3));
+		enemyData.put("santa", new EnemyData(100, 30, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), 20, 25, "azazon", 3));
+		enemyData.put("stork", new EnemyData(25, 5, new EnemyAppearance(new String[] {"stork_walk_1", "stork_walk_2"}, "santa_death"), 5, 45, "azazon", 3));
+		enemyData.put("pigeon", new EnemyData(1, 1, new EnemyAppearance(new String[] {"pigeon_walk_1", "pigeon_walk_2"}, "pigeon_death"), 1, 120, "", 0));
 
 		loadTextures();
 
@@ -64,6 +79,22 @@ public class AnimalGame extends ApplicationAdapter {
 
 		playerManager.setMoney(15);
 		playerManager.setHealth(100);
+	}
+
+	public static Enemy createEnemy(World world, String name, List<Vector2> path){
+		EnemyData enemyData = instance.enemyData.get(name);
+
+		if(enemyData == null){
+			Gdx.app.error("CreateEnemy", "Couldn't create enemy "+name+", doesn't exist!");
+			return null;
+		}
+
+		Enemy enemy = new Enemy(world, enemyData.health, enemyData.pointValue, enemyData.appearance, path);
+
+		enemy.setDamage(enemyData.damage);
+		enemy.setSpeed(enemyData.speed);
+
+		return enemy;
 	}
 
 	@Override
@@ -128,7 +159,7 @@ public class AnimalGame extends ApplicationAdapter {
 
 		textures.put("azazon_death", new Texture("images/azazon_death.png"));
 		textures.put("azazon_walk_1", new Texture("images/azazon_walk1.png"));
-		textures.put("azazon_walK_2", new Texture("images/azazon_walk2.png"));
+		textures.put("azazon_walk_2", new Texture("images/azazon_walk2.png"));
 
 		textures.put("mailman_death", new Texture("images/mailman_death.png"));
 		textures.put("mailman_walk_1", new Texture("images/mailman_walk1.png"));

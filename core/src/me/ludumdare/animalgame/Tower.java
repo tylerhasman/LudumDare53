@@ -2,7 +2,6 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public abstract class Tower extends Entity {
     private float frameTimer;
     private float frameSpeed;
 
-    public Tower(World world, String towerName, TowerAppearance appearance, int price) {
+    public Tower(World world, TowerAppearance appearance, int price) {
         super(world);
         attackSpeed = 1f;
         attackRange = 200f;
