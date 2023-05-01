@@ -83,7 +83,6 @@ public class World {
 
         entities.removeIf(Entity::isRemoved);
 
-
         spawnEnemyTimer -= delta;
         if(spawnEnemyTimer <= 0){
             spawnEnemyTimer = 1f;
@@ -92,7 +91,7 @@ public class World {
             path.add(new Vector2(Gdx.graphics.getWidth()-50,100));
 
             Enemy enemy = new Enemy(this, 20, 20, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), path);
-            enemy.getPosition().set(50,100);
+            enemy.getPosition().set(50, 50);
             entities.add(enemy);
         }
 

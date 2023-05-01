@@ -10,43 +10,46 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Level {
+
     private World world;
     private List<Vector2> pathPoints; //coords for pathing, including spawnPoint or goalPoint
     private String mapTexture; //level map
     private String invalidMap; //map for checking tower placements
     private List<List<Enemy>> waveList; //list of list of enemies (waves)
-    private final int spawnTimer = 3000; //number of ms to wait to spawn wave after spawning previous wave
-    private final int spawnDelay = 1000; //number of ms to wait between enemy spawns in same wave
-    public Level(World _world, List<Vector2> _pathPoints, String _mapTexture, String _invalidMap, List<List<Enemy>> _waveList) {
-        this.world = _world;
+
+    public Level(List<Vector2> _pathPoints, String _mapTexture, String _invalidMap, List<List<Enemy>> _waveList) {
         this.pathPoints = _pathPoints;
         this.mapTexture = _mapTexture;
         this.invalidMap = _invalidMap;
         this.waveList = _waveList;
     }
 
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public List<Vector2> getPathPoints() {
+        return pathPoints;
+    }
+
+    public String getMapTexture() {
+        return mapTexture;
+    }
+
     private void spawnNextWave(List<List<Enemy>> _waveList) {
         //TODO: put this in an update function?
         if ((_waveList.size() > 0) && (_waveList != null)) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                public void run() {
-                    spawnWave(_waveList.remove(0));
-                }
-            }, spawnTimer);
+
         }
     }
+
     private void spawnWave(List<Enemy> wave) {
         //TODO
         for (Enemy enemy: wave) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                public void run() {
-                    //spawn enemy at pathPoints[0] via enemy.render?
-                }
-            }, spawnDelay);
+
         }
     }
+
     public boolean isValidTowerPlacement(Vector2 cursorPosition, Tower tower) {
         //if pixel on invalidMap is blocked, return false;
         float towerRadius = tower.getRadius();
@@ -64,6 +67,7 @@ public class Level {
         }
         return true;
     }
+
     public boolean isLevelDone() {
         //if enemy wave is empty && there are no enemies in the world, return true
         return ((this.waveList.size() == 0) && (world.getEntitiesOfClass(Enemy.class).size() == 0));

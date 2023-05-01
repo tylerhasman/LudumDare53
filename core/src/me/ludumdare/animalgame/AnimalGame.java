@@ -5,10 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AnimalGame extends ApplicationAdapter {
 
@@ -21,7 +21,9 @@ public class AnimalGame extends ApplicationAdapter {
 	private Shop shop;
 
 	private PlayerManager playerManager;
+
 	private Level level;
+	private int levelIndex;
 
 	private Map<String, Texture> textures;
 
@@ -41,6 +43,20 @@ public class AnimalGame extends ApplicationAdapter {
 
 		playerManager = new PlayerManager();
 		shop  = new Shop(world);
+
+		switchLevels(0);
+
+	}
+
+	public void switchLevels(int levelNumber){
+		world = new World();
+
+		this.levelIndex = levelNumber;
+		this.level = Levels.LEVELS[levelNumber];
+		this.level.setWorld(world);
+
+		playerManager.setMoney(15);
+		playerManager.setHealth(100);
 	}
 
 	@Override
@@ -73,7 +89,9 @@ public class AnimalGame extends ApplicationAdapter {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(AnimalGame.getTexture("level1"), 0, 0);
+
+		batch.draw(getTexture(level.getMapTexture()), 0, 0, world.getWidth(), world.getHeight());
+
 		world.render(batch);
 		shop.render(batch);
 		playerManager.render(batch);
