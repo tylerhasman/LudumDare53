@@ -54,7 +54,7 @@ public abstract class Tower extends Entity {
 
         Texture texture = getTexture();
 
-        spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius(), getRadius());
+        spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 2, getRadius() * 2);
     }
 
     @Override
