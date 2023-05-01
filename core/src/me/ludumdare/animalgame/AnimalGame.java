@@ -87,6 +87,10 @@ public class AnimalGame extends ApplicationAdapter {
 		return level;
 	}
 
+	public int getLevelIndex() {
+		return levelIndex;
+	}
+
 	@Override
 	public void render () {
 		world.update(Gdx.graphics.getDeltaTime());
