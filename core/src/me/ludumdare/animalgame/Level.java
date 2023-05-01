@@ -60,7 +60,7 @@ public class Level {
         Pixmap pixmap = invTex.consumePixmap();
         for (float x = cursorPosition.x-towerRadius; x < cursorPosition.x+towerRadius; x++) {
             for (float y = cursorPosition.y-towerRadius; y < cursorPosition.y+towerRadius; y++) {
-                if (new Color(pixmap.getPixel((int)x, (int)y)).a > 0) {
+                if (new Color(pixmap.getPixel((int)x, (int)y)).a == 1) {
                     return false;
                 }
             }

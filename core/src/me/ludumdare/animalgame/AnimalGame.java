@@ -42,7 +42,7 @@ public class AnimalGame extends ApplicationAdapter {
 		loadTextures();
 
 		playerManager = new PlayerManager();
-		shop  = new Shop(world);
+		shop = new Shop(world);
 
 		switchLevels(0);
 
@@ -54,6 +54,8 @@ public class AnimalGame extends ApplicationAdapter {
 		this.levelIndex = levelNumber;
 		this.level = Levels.LEVELS[levelNumber];
 		this.level.setWorld(world);
+
+		shop = new Shop(world);
 
 		playerManager.setMoney(15);
 		playerManager.setHealth(100);
@@ -79,6 +81,10 @@ public class AnimalGame extends ApplicationAdapter {
 
 	public PlayerManager getPlayerManager() {
 		return playerManager;
+	}
+
+	public Level getLevel() {
+		return level;
 	}
 
 	@Override
