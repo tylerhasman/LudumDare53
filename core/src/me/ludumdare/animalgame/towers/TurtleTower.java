@@ -7,12 +7,12 @@ import me.ludumdare.animalgame.World;
 public class TurtleTower extends ProjectileTower {
 
     public TurtleTower(World world) {
-        super(world, "Turtle", "dog_idle_0", 50);
+        super(world, "Turtle", "turtle_idle_0", 50);
     }
 
     @Override
     public Projectile createProjectile() {
-        Projectile projectile = new Projectile(getWorld(), "tennis_ball");
+        Projectile projectile = new Projectile(getWorld(), "shell");
 
         projectile.setDamage(1);
         projectile.setRadius(16);

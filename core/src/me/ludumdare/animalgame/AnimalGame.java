@@ -121,6 +121,27 @@ public class AnimalGame extends ApplicationAdapter {
 
 		textures.put("tennis_ball", new Texture("images/dog_projectile.png"));
 
+		textures.put("cat_attack_0", new Texture("images/cat_attack1.png"));
+		textures.put("cat_attack_1", new Texture("images/cat_attack2.png"));
+		textures.put("cat_idle_0", new Texture("images/cat_idle1.png"));
+		textures.put("cat_idle_1", new Texture("images/cat_idle2.png"));
+
+		textures.put("mouse", new Texture("images/cat_projectile.png"));
+
+		textures.put("gunguy_attack_0", new Texture("images/gunguy_attack1.png"));
+		textures.put("gunguy_attack_1", new Texture("images/gunguy_attack2.png"));
+		textures.put("gunguy_idle_0", new Texture("images/gunguy_idle1.png"));
+		textures.put("gunguy_idle_1", new Texture("images/gunguy_idle2.png"));
+
+		textures.put("bullet", new Texture("images/gunguy_projectile.png"));
+
+		textures.put("turtle_attack_0", new Texture("images/turtle_attack1.png"));
+		textures.put("turtle_attack_1", new Texture("images/turtle_attack2.png"));
+		textures.put("turtle_idle_0", new Texture("images/turtle_idle1.png"));
+		textures.put("turtle_idle_1", new Texture("images/turtle_idle2.png"));
+
+		textures.put("shell", new Texture("images/turtle_projectile.png"));
+
 		textures.put("level1", new Texture("images/lvl1.png"));
 		textures.put("level1_invalid", new Texture("images/lvl1invalid.png"));
 
