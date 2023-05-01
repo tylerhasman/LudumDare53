@@ -160,6 +160,13 @@ public class AnimalGame extends ApplicationAdapter {
 
 		textures.put("shell", new Texture("images/turtle_projectile.png"));
 
+		textures.put("rabbit_attack_0", new Texture("images/rabbit_attack1.png"));
+		textures.put("rabbit_attack_1", new Texture("images/rabbit_attack2.png"));
+		textures.put("rabbit_idle_0", new Texture("images/rabbit_idle1.png"));
+		textures.put("rabbit_idle_1", new Texture("images/rabbit_idle2.png"));
+
+		textures.put("carrot", new Texture("images/rabbit_projectile.png"));
+
 		textures.put("level1", new Texture("images/lvl1.png"));
 		textures.put("level1_invalid", new Texture("images/lvl1invalid.png"));
 
@@ -174,6 +181,8 @@ public class AnimalGame extends ApplicationAdapter {
 		textures.put("brown_2", new Texture("images/brown2.png"));
 
 		textures.put("range", new Texture("images/range.png"));
+		textures.put("heart", new Texture("images/heart0.png"));
+		textures.put("coin", new Texture("images/coin.png"));
 
 	}
 }
