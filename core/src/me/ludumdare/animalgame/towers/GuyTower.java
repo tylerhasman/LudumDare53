@@ -7,7 +7,7 @@ import me.ludumdare.animalgame.World;
 public class GuyTower extends ProjectileTower {
 
     public GuyTower(World world) {
-        super(world, "Old Man", "dog_idle_0");
+        super(world, "Old Man", "dog_idle_0", 30);
     }
 
     @Override

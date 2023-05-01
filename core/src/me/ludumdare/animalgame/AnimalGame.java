@@ -41,7 +41,7 @@ public class AnimalGame extends ApplicationAdapter {
 		loadTextures();
 
 		playerManager = new PlayerManager();
-		shop  = new Shop(world, playerManager);
+		shop  = new Shop(world);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class AnimalGame extends ApplicationAdapter {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-
+//		batch.draw(AnimalGame.getTexture("level1"), 0, 0);
 		world.render(batch);
 		shop.render(batch);
 		playerManager.render(batch);
