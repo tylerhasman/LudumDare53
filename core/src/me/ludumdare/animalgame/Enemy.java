@@ -2,6 +2,7 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
@@ -37,6 +38,9 @@ public class Enemy extends Entity {
 
     private float showDamageTimer;
 
+    private String deathSpawn;
+    private int deathSpawnAmount;
+
     public Enemy(World world, int health, int value, EnemyAppearance enemyAppearance, List<Vector2> path) {
         super(world);
         this.health = health;
@@ -52,6 +56,14 @@ public class Enemy extends Entity {
         deathFade = DEATH_FADE_TIME;
         deadEnemy = false;
         showDamageTimer = 0;
+    }
+
+    public void setDeathSpawn(String deathSpawn) {
+        this.deathSpawn = deathSpawn;
+    }
+
+    public void setDeathSpawnAmount(int deathSpawnAmount) {
+        this.deathSpawnAmount = deathSpawnAmount;
     }
 
     public void setDamage(int damage) {
@@ -120,6 +132,18 @@ public class Enemy extends Entity {
                 deadEnemy = true;
                 AnimalGame.getInstance().getPlayerManager().earnMoney(value);
                 AnimalGame.getInstance().getPlayerManager().increaseScore(value);
+
+                if(deathSpawn != null && !deathSpawn.isEmpty()){
+                    for(int i = 0; i < deathSpawnAmount;i++){
+                        Enemy child = AnimalGame.createEnemy(getWorld(), deathSpawn, path);
+                        if (child != null) {
+                            child.currentPathIndex = currentPathIndex;
+                            child.getPosition().set(getPosition().cpy().add(MathUtils.random(-32f, 32f), MathUtils.random(-32f, 32f)));
+                            getWorld().addEntity(child);
+                        }
+                    }
+                }
+
             }
             deathFade -= delta;
             if(deathFade <= 0f){

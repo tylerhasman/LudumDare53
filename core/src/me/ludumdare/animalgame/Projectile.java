@@ -58,6 +58,11 @@ public class Projectile extends Entity{
         for(Entity nearby : nearbyEntities){
             if(nearby instanceof Enemy){
                 Enemy enemy = (Enemy) nearby;
+
+                if(enemy.isDead()){
+                    continue;
+                }
+
                 //Prevents things from the turtle shell from double hitting something until it leaves it
                 if(inside.contains(enemy)){
                     continue;
