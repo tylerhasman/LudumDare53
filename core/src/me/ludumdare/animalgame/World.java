@@ -1,9 +1,11 @@
 package me.ludumdare.animalgame;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +16,13 @@ public class World {
     public World(){
         entities = new ArrayList<>();
         toAdd = new ArrayList<>();
+
+        List<Vector2> path = new ArrayList<>();
+        path.add(new Vector2(Gdx.graphics.getWidth()-50,100));
+
+        Enemy enemy = new Enemy(this, 20, 20, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), path);
+        enemy.getPosition().set(50,100);
+        entities.add(enemy);
     }
 
     public boolean isTowerPlaceable(Vector2 position, float towerSize){
@@ -26,8 +35,8 @@ public class World {
     }
 
     public List<Entity> getEntities() {
-        return entities;
-    }
+            return entities;
+        }
 
     /**
      * Get a list of entities that are colliding with a circle.
