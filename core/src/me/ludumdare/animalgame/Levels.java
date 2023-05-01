@@ -49,9 +49,29 @@ public class Levels {
         oneWave4.add(azazon);
         oneWave4.add(azazon);
         List<String> oneWave5 = new ArrayList<>();
+        oneWave5.add(mailman);
+        oneWave5.add(mailman);
+        oneWave5.add(azazon);
+        oneWave5.add(mailman);
+        oneWave5.add(azazon);
         List<String> oneWave6 = new ArrayList<>();
+        oneWave6.add(mailman);
+        oneWave6.add(azazon);
+        oneWave6.add(mailman);
+        oneWave6.add(mailman);
+        oneWave6.add(azazon);
         List<String> oneWave7 = new ArrayList<>();
+        oneWave7.add(azazon);
+        oneWave7.add(mailman);
+        oneWave7.add(azazon);
+        oneWave7.add(mailman);
+        oneWave7.add(azazon);
         List<String> oneWave8 = new ArrayList<>();
+        oneWave8.add(azazon);
+        oneWave8.add(azazon);
+        oneWave8.add(azazon);
+        oneWave8.add(azazon);
+        oneWave8.add(azazon);
         List<List<String>> level1Enemies = new ArrayList<>();
         level1Enemies.add(oneWave1);
         level1Enemies.add(oneWave2);
@@ -72,22 +92,43 @@ public class Levels {
                         new Vector2(900, Y-650), new Vector2(900, Y-270),
                         new Vector2(1150, Y-270), new Vector2(1150, 0));
 
-        List<String> twoWave1 = new ArrayList<>();
         List<String> twoWave2 = new ArrayList<>();
-        List<String> twoWave3 = new ArrayList<>();
+        twoWave2.add(azazon);
+        twoWave2.add(mailman);
+        twoWave2.add(pigeon);
+        twoWave2.add(pigeon);
+        twoWave2.add(azazon);
         List<String> twoWave4 = new ArrayList<>();
-        List<String> twoWave5 = new ArrayList<>();
-        List<String> twoWave6 = new ArrayList<>();
+        twoWave4.add(pigeon);
+        twoWave4.add(santa);
+        twoWave4.add(pigeon);
+        twoWave4.add(azazon);
+        twoWave4.add(azazon);
         List<String> twoWave7 = new ArrayList<>();
+        twoWave7.add(pigeon);
+        twoWave7.add(stork);
+        twoWave7.add(pigeon);
+        twoWave7.add(azazon);
+        twoWave7.add(stork);
         List<String> twoWave8 = new ArrayList<>();
+        twoWave8.add(pigeon);
+        twoWave8.add(pigeon);
+        twoWave8.add(pigeon);
+        twoWave8.add(pigeon);
+        twoWave8.add(pigeon);
         List<String> twoWave9 = new ArrayList<>();
+        twoWave8.add(stork);
+        twoWave8.add(stork);
+        twoWave8.add(stork);
+        twoWave8.add(stork);
+        twoWave8.add(stork);
         List<List<String>> level2Enemies = new ArrayList<>();
-        level2Enemies.add(twoWave1);
+        level2Enemies.add(oneWave1); //reuse waves from level 1
         level2Enemies.add(twoWave2);
-        level2Enemies.add(twoWave3);
+        level2Enemies.add(oneWave7); //reusing waves
         level2Enemies.add(twoWave4);
-        level2Enemies.add(twoWave5);
-        level2Enemies.add(twoWave6);
+        level2Enemies.add(oneWave8); //reusing wave
+        level2Enemies.add(twoWave2); //reusing wave from level 2
         level2Enemies.add(twoWave7);
         level2Enemies.add(twoWave8);
         level2Enemies.add(twoWave9);
@@ -103,9 +144,6 @@ public class Levels {
                         new Vector2(1075, Y-400), new Vector2(915, Y-200),
                         new Vector2(1180, Y));
 
-        List<String> threeWave1 = new ArrayList<>();
-        List<String> threeWave2 = new ArrayList<>();
-        List<String> threeWave3 = new ArrayList<>();
         List<String> threeWave4 = new ArrayList<>();
         List<String> threeWave5 = new ArrayList<>();
         List<String> threeWave6 = new ArrayList<>();
@@ -113,10 +151,15 @@ public class Levels {
         List<String> threeWave8 = new ArrayList<>();
         List<String> threeWave9 = new ArrayList<>();
         List<String> threeWave10 = new ArrayList<>();
+        threeWave10.add(santa);
+        threeWave10.add(santa);
+        threeWave10.add(santa);
+        threeWave10.add(santa);
+        threeWave10.add(santa);
         List<List<String>> level3Enemies = new ArrayList<>();
-        level3Enemies.add(threeWave1);
-        level3Enemies.add(threeWave2);
-        level3Enemies.add(threeWave3);
+        level3Enemies.add(oneWave7); //reusing waves from level 1
+        level3Enemies.add(twoWave2); //reusing waves
+        level3Enemies.add(twoWave7); //reusing waves
         level3Enemies.add(threeWave4);
         level3Enemies.add(threeWave5);
         level3Enemies.add(threeWave6);
