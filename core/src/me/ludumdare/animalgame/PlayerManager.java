@@ -43,10 +43,10 @@ public class PlayerManager {
         font.draw(spriteBatch, String.valueOf(money), Gdx.graphics.getWidth() - moneyTextWidth - 80, 35);
         font.draw(spriteBatch, String.valueOf(score), Gdx.graphics.getWidth() - 205 - scoreTextWidth , Gdx.graphics.getHeight() - 10);
 
-        boolean levelDone = AnimalGame.getInstance().getLevel().isLevelDone();
+/*        boolean levelDone = AnimalGame.getInstance().getLevel().isLevelDone();
         if (levelDone) {
             AnimalGame.getInstance().switchLevels(AnimalGame.getInstance().getLevelIndex() + 1);
-        }
+        }*/
 
         if (health <= 0) {
             AnimalGame.getInstance().switchLevels(0);
