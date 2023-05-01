@@ -23,6 +23,8 @@ public abstract class ProjectileTower extends Tower {
 
         Projectile projectile = createProjectile();
 
+        projectile.getPosition().set(getPosition());
+
         projectile.setVelocity(direction.scl(projectileSpeed));
 
         getWorld().addEntity(projectile);
