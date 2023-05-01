@@ -8,22 +8,41 @@ import java.util.List;
 
 public abstract class Tower extends Entity {
 
+    private static final int ANIMATION_STATE_IDLE = 0, ANIMATION_STATE_ATTACKING = 1;
+
     private float attackRange;
     private float attackSpeed;
     private float attackTimer;
     private int price;
 
-    private final String towerName;
-    private final String towerTexture;
+    private final TowerAppearance appearance;
 
-    public Tower(World world, String towerName, String towerTexture, int price) {
+    private int animationState;
+    private int currentFrame;
+    private float frameTimer;
+    private float frameSpeed;
+
+    public Tower(World world, String towerName, TowerAppearance appearance, int price) {
         super(world);
         attackSpeed = 1f;
         attackRange = 200f;
         attackTimer = 0f;
         this.price  = price;
-        this.towerName = towerName;
-        this.towerTexture = towerTexture;
+        this.appearance = appearance;
+        changeAnimationState(ANIMATION_STATE_IDLE, 0.5f);
+    }
+
+    private void changeAnimationState(int newState, float frameSpeed){
+        if(newState != currentFrame){
+            animationState = newState;
+            currentFrame = 0;
+            frameTimer = frameSpeed;
+            this.frameSpeed = frameSpeed;
+        }
+    }
+
+    public float getAttackRange() {
+        return attackRange;
     }
 
     public void setAttackRange(float attackRange) {
@@ -38,15 +57,31 @@ public abstract class Tower extends Entity {
 
     public abstract void attack(Enemy enemy);
 
-    public String getName(){
-        return towerName;
+    private String[] getCurrentAnimationFrames(){
+        String[] animArray = null;
+
+        if(animationState == ANIMATION_STATE_IDLE){
+            animArray = appearance.idleAnimations;
+        }else if(animationState == ANIMATION_STATE_ATTACKING){
+            animArray = appearance.attackingAnimations;
+        }
+
+        return animArray;
     }
 
     public Texture getTexture(){
-        return AnimalGame.getTexture(towerTexture);
-    }
+        Texture texture = null;
 
-    public String getTextureName() { return towerTexture; }
+        String[] animArray = getCurrentAnimationFrames();
+
+        if(animArray != null){
+            String frame = animArray[currentFrame % animArray.length];
+
+            texture = AnimalGame.getTexture(frame);
+        }
+
+        return texture;
+    }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
@@ -54,7 +89,9 @@ public abstract class Tower extends Entity {
 
         Texture texture = getTexture();
 
-        spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 2, getRadius() * 2);
+        if(texture != null){
+            spriteBatch.draw(texture, getPosition().x - getRadius(), getPosition().y - getRadius(), getRadius() * 2, getRadius() * 2);
+        }
     }
 
     @Override
@@ -72,11 +109,23 @@ public abstract class Tower extends Entity {
                 if(entity instanceof Enemy){
                     Enemy enemy = (Enemy) entity;
                     if(entity.getPosition().dst2(getPosition()) <= attackRange * attackRange){
+                        changeAnimationState(ANIMATION_STATE_ATTACKING, attackSpeed / 4f);
                         attack(enemy);
                         attackTimer = attackSpeed;
                         break;
                     }
                 }
+            }
+        }
+
+        frameTimer -= delta;
+        if(frameTimer <= 0){
+            frameTimer = frameSpeed;
+
+            currentFrame++;
+
+            if(currentFrame >= getCurrentAnimationFrames().length){
+                changeAnimationState(ANIMATION_STATE_IDLE, 0.5f);
             }
         }
 

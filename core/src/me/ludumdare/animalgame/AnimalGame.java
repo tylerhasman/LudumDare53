@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -139,6 +137,7 @@ public class AnimalGame extends ApplicationAdapter {
 		textures.put("turtle_attack_1", new Texture("images/turtle_attack2.png"));
 		textures.put("turtle_idle_0", new Texture("images/turtle_idle1.png"));
 		textures.put("turtle_idle_1", new Texture("images/turtle_idle2.png"));
+		textures.put("turtle_nest", new Texture("images/turtle_nest.png"));
 
 		textures.put("shell", new Texture("images/turtle_projectile.png"));
 
@@ -148,6 +147,11 @@ public class AnimalGame extends ApplicationAdapter {
 		textures.put("level2", new Texture("images/lvl2.png"));
 		textures.put("level2_invalid", new Texture("images/lvl2invalid.png"));
 
+		textures.put("shop_tray", new Texture("images/Shop Tray.png"));
+		textures.put("brown_1", new Texture("images/brown1.png"));
+		textures.put("brown_2", new Texture("images/brown2.png"));
+
+		textures.put("range", new Texture("images/range.png"));
 
 	}
 }

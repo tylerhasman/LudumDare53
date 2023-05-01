@@ -5,24 +5,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class World {
 
     private List<Entity> entities, toAdd;
 
+    //DEBUG
+
+    private float spawnEnemyTimer;
+
+    //END DEBUG
+
     public World(){
         entities = new ArrayList<>();
         toAdd = new ArrayList<>();
+    }
 
-        List<Vector2> path = new ArrayList<>();
-        path.add(new Vector2(Gdx.graphics.getWidth()-50,100));
+    //not good to hardcode ths but whatever losers
+    public float getWidth(){
+        return 1280;
+    }
 
-        Enemy enemy = new Enemy(this, 20, 20, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), path);
-        enemy.getPosition().set(50,100);
-        entities.add(enemy);
+    public float getHeight(){
+        return 800;
     }
 
     public void addEntity(Entity entity){
@@ -76,6 +82,19 @@ public class World {
         }
 
         entities.removeIf(Entity::isRemoved);
+
+
+        spawnEnemyTimer -= delta;
+        if(spawnEnemyTimer <= 0){
+            spawnEnemyTimer = 1f;
+
+            List<Vector2> path = new ArrayList<>();
+            path.add(new Vector2(Gdx.graphics.getWidth()-50,100));
+
+            Enemy enemy = new Enemy(this, 20, 20, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), path);
+            enemy.getPosition().set(50,100);
+            entities.add(enemy);
+        }
     }
 
     public void render(SpriteBatch spriteBatch){
