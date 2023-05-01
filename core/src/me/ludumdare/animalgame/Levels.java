@@ -12,6 +12,11 @@ public class Levels {
     public static int Y = 800;
 
     static {
+        String mailman = "mail_man";
+        String azazon = "azazon";
+        String stork = "stork";
+        String pigeon = "pigeon";
+        String santa = "santa";
         // LEVEL 1 //////////////////////////////////////////////////////////////////////////////
         List<Vector2> level1Points = Arrays.asList
                 (new Vector2(6, Y - 260), new Vector2(390, Y - 430),
@@ -19,7 +24,43 @@ public class Levels {
                         new Vector2(975, Y - 270), new Vector2(855, Y - 710),
                         new Vector2(1000, Y-755), new Vector2(1280, Y - 610));
 
-        List<List<Enemy>> level1Enemies = Arrays.asList();
+        List<String> oneWave1 = new ArrayList<>();
+        oneWave1.add(mailman);
+        oneWave1.add(mailman);
+        oneWave1.add(mailman);
+        oneWave1.add(mailman);
+        oneWave1.add(mailman);
+        List<String> oneWave2 = new ArrayList<>();
+        oneWave2.add(mailman);
+        oneWave2.add(azazon);
+        oneWave2.add(azazon);
+        oneWave2.add(mailman);
+        oneWave2.add(azazon);
+        List<String> oneWave3 = new ArrayList<>();
+        oneWave3.add(mailman);
+        oneWave3.add(mailman);
+        oneWave3.add(azazon);
+        oneWave3.add(mailman);
+        oneWave3.add(azazon);
+        List<String> oneWave4 = new ArrayList<>();
+        oneWave4.add(mailman);
+        oneWave4.add(mailman);
+        oneWave4.add(azazon);
+        oneWave4.add(azazon);
+        oneWave4.add(azazon);
+        List<String> oneWave5 = new ArrayList<>();
+        List<String> oneWave6 = new ArrayList<>();
+        List<String> oneWave7 = new ArrayList<>();
+        List<String> oneWave8 = new ArrayList<>();
+        List<List<String>> level1Enemies = new ArrayList<>();
+        level1Enemies.add(oneWave1);
+        level1Enemies.add(oneWave2);
+        level1Enemies.add(oneWave3);
+        level1Enemies.add(oneWave4);
+        level1Enemies.add(oneWave5);
+        level1Enemies.add(oneWave6);
+        level1Enemies.add(oneWave7);
+        level1Enemies.add(oneWave8);
 
         LEVEL_ONE = new Level(level1Points, "level1", "level1_invalid", level1Enemies);
 
@@ -31,7 +72,25 @@ public class Levels {
                         new Vector2(900, Y-650), new Vector2(900, Y-270),
                         new Vector2(1150, Y-270), new Vector2(1150, 0));
 
-        List<List<Enemy>> level2Enemies = Arrays.asList();
+        List<String> twoWave1 = new ArrayList<>();
+        List<String> twoWave2 = new ArrayList<>();
+        List<String> twoWave3 = new ArrayList<>();
+        List<String> twoWave4 = new ArrayList<>();
+        List<String> twoWave5 = new ArrayList<>();
+        List<String> twoWave6 = new ArrayList<>();
+        List<String> twoWave7 = new ArrayList<>();
+        List<String> twoWave8 = new ArrayList<>();
+        List<String> twoWave9 = new ArrayList<>();
+        List<List<String>> level2Enemies = new ArrayList<>();
+        level2Enemies.add(twoWave1);
+        level2Enemies.add(twoWave2);
+        level2Enemies.add(twoWave3);
+        level2Enemies.add(twoWave4);
+        level2Enemies.add(twoWave5);
+        level2Enemies.add(twoWave6);
+        level2Enemies.add(twoWave7);
+        level2Enemies.add(twoWave8);
+        level2Enemies.add(twoWave9);
 
         LEVEL_TWO = new Level(level2Points, "level2", "level2_invalid", level2Enemies);
 
@@ -44,7 +103,27 @@ public class Levels {
                         new Vector2(1075, Y-400), new Vector2(915, Y-200),
                         new Vector2(1180, Y));
 
-        List<List<Enemy>> level3Enemies = Arrays.asList();
+        List<String> threeWave1 = new ArrayList<>();
+        List<String> threeWave2 = new ArrayList<>();
+        List<String> threeWave3 = new ArrayList<>();
+        List<String> threeWave4 = new ArrayList<>();
+        List<String> threeWave5 = new ArrayList<>();
+        List<String> threeWave6 = new ArrayList<>();
+        List<String> threeWave7 = new ArrayList<>();
+        List<String> threeWave8 = new ArrayList<>();
+        List<String> threeWave9 = new ArrayList<>();
+        List<String> threeWave10 = new ArrayList<>();
+        List<List<String>> level3Enemies = new ArrayList<>();
+        level3Enemies.add(threeWave1);
+        level3Enemies.add(threeWave2);
+        level3Enemies.add(threeWave3);
+        level3Enemies.add(threeWave4);
+        level3Enemies.add(threeWave5);
+        level3Enemies.add(threeWave6);
+        level3Enemies.add(threeWave7);
+        level3Enemies.add(threeWave8);
+        level3Enemies.add(threeWave9);
+        level3Enemies.add(threeWave10);
 
         LEVEL_THREE = new Level(level3Points, "level3", "level3_invalid", level3Enemies);
     }
