@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PlayerManager {
+
     private int health;
     private int score;
     private int money;
-    private int currentLevel;
 
     public PlayerManager() {
         money = 200;
@@ -28,12 +28,6 @@ public class PlayerManager {
     }
     public int getHealth() {
         return health;
-    }
-
-    public void changeCurrentLevel(int level) {
-        currentLevel = level;
-        setMoney(0);
-        setHealth(100);
     }
 
     public void render(SpriteBatch spriteBatch)  {
