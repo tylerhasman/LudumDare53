@@ -10,16 +10,24 @@ import java.util.List;
 public class World {
 
     private List<Entity> entities, toAdd;
+    private List<List<Enemy>> enemyWaves;
+    private List<Enemy> enemies, toAddEnemies;
 
     //DEBUG
 
+    private final float SPAWNTIMER = 0.8f;
+    private final float WAVETIMER = 6.0f;
     private float spawnEnemyTimer;
+    private float spawnWaveTimer;
 
     //END DEBUG
 
     public World(){
         entities = new ArrayList<>();
         toAdd = new ArrayList<>();
+        enemyWaves = new ArrayList<>();
+        enemies = new ArrayList<>();
+        toAddEnemies = new ArrayList<>();
     }
 
     //not good to hardcode ths but whatever losers
@@ -31,6 +39,9 @@ public class World {
         return 800;
     }
 
+    public void setWaves(List<List<Enemy>> _enemyWaves) {
+        this.enemyWaves = _enemyWaves;
+    }
     public void addEntity(Entity entity){
         toAdd.add(entity);
     }
@@ -74,6 +85,35 @@ public class World {
     }
 
     public void update(float delta){
+        //spawnEntity(delta);
+        spawnWaves(delta);
+        spawnEnemy(delta);
+    }
+
+    private void spawnEnemy(float delta) {
+        for(Enemy enemy : enemies){
+            enemy.update(delta);
+        }
+        enemies.removeIf(Entity::isRemoved);
+
+        spawnEnemyTimer -= delta;
+        if(spawnEnemyTimer <= 0){
+            spawnEnemyTimer = SPAWNTIMER;
+            enemies.add(toAddEnemies.remove(0));
+        }
+        enemies.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
+    }
+
+    private void spawnWaves(float delta) {
+        //after the timer is up, put a new wave into the toAddEnemies list to queue to be spawned
+        spawnWaveTimer -= delta;
+        if (spawnWaveTimer <= 0) {
+            spawnWaveTimer = WAVETIMER;
+            toAddEnemies.addAll(enemyWaves.remove(0));
+        }
+    }
+
+    private void spawnEntity(float delta) {
         entities.addAll(toAdd);
         toAdd.clear();
 
@@ -85,7 +125,7 @@ public class World {
 
         spawnEnemyTimer -= delta;
         if(spawnEnemyTimer <= 0){
-            spawnEnemyTimer = 1f;
+            spawnEnemyTimer = SPAWNTIMER;
 
             List<Vector2> path = new ArrayList<>();
             path.add(new Vector2(Gdx.graphics.getWidth()-50,100));
@@ -104,6 +144,12 @@ public class World {
         }
         for(Entity entity : entities){
             entity.render(spriteBatch);
+        }
+        for(Enemy enemy : enemies){
+            enemy.preRender(spriteBatch);
+        }
+        for(Enemy enemy : enemies){
+            enemy.render(spriteBatch);
         }
     }
 
