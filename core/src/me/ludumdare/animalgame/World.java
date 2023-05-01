@@ -10,8 +10,8 @@ import java.util.List;
 public class World {
 
     private List<Entity> entities, toAdd;
-    private List<List<Enemy>> enemyWaves;
-    private List<Enemy> toAddEnemies;
+    private List<List<String>> enemyWaves;
+    private List<String> toAddEnemies;
 
     //DEBUG
 
@@ -25,7 +25,7 @@ public class World {
     public World(){
         entities = new ArrayList<>();
         toAdd = new ArrayList<>();
-        enemyWaves = new ArrayList<>();
+        enemyWaves = AnimalGame.getInstance().getLevel().getWaveList();
         toAddEnemies = new ArrayList<>();
     }
 
@@ -38,7 +38,7 @@ public class World {
         return 800;
     }
 
-    public void setWaves(List<List<Enemy>> _enemyWaves) {
+    public void setWaves(List<List<String>> _enemyWaves) {
         this.enemyWaves = _enemyWaves;
     }
     public void addEntity(Entity entity){
@@ -105,7 +105,10 @@ public class World {
         if(spawnEnemyTimer <= 0){
             spawnEnemyTimer = SPAWNTIMER;
             if (!toAddEnemies.isEmpty()) {
-                entities.add(toAddEnemies.remove(0));
+                List<Vector2> path = AnimalGame.getInstance().getLevel().getPathPoints();
+                Enemy enemy = AnimalGame.createEnemy(this, toAddEnemies.remove(0), path);
+                enemy.getPosition().set(path.get(0));
+                addEntity(enemy);
             }
         }
     }

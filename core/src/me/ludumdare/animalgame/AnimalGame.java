@@ -60,11 +60,11 @@ public class AnimalGame extends ApplicationAdapter {
 		shop = new Shop(world);
 
 		switchLevels(0);
-		setSpawnWaves(this.level.getWaveList());
+//		setSpawnWaves(this.level.getWaveList());
 
 	}
 
-	private void setSpawnWaves(List<List<Enemy>> _waveList) {
+	private void setSpawnWaves(List<List<String>> _waveList) {
 		this.world.setWaves(_waveList);
 	}
 
@@ -77,7 +77,7 @@ public class AnimalGame extends ApplicationAdapter {
 
 		shop = new Shop(world);
 
-		playerManager.setMoney(15);
+		playerManager.setMoney(1500);
 		playerManager.setHealth(100);
 	}
 

@@ -14,11 +14,11 @@ public class Level {
     private List<Vector2> pathPoints; //coords for pathing, including spawnPoint or goalPoint
     private String mapTexture; //level map
     private String invalidMap; //map for checking tower placements
-    private List<List<Enemy>> waveList; //list of list of enemies (waves)
+    private List<List<String>> waveList; //list of list of enemies types (waves)
 
     private Pixmap pixmap;
 
-    public Level(List<Vector2> _pathPoints, String _mapTexture, String _invalidMap, List<List<Enemy>> _waveList) {
+    public Level(List<Vector2> _pathPoints, String _mapTexture, String _invalidMap, List<List<String>> _waveList) {
         this.pathPoints = _pathPoints;
         this.mapTexture = _mapTexture;
         this.invalidMap = _invalidMap;
@@ -40,7 +40,7 @@ public class Level {
     public String getInvalidMap() {
         return invalidMap;
     }
-    public List<List<Enemy>> getWaveList() {
+    public List<List<String>> getWaveList() {
         return this.waveList;
     }
 
