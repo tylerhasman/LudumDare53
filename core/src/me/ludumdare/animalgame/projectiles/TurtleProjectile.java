@@ -1,6 +1,5 @@
 package me.ludumdare.animalgame.projectiles;
 
-import com.badlogic.gdx.Gdx;
 import me.ludumdare.animalgame.Projectile;
 import me.ludumdare.animalgame.World;
 import me.ludumdare.animalgame.towers.TurtleTower;
@@ -28,6 +27,28 @@ public class TurtleProjectile extends Projectile {
         turtleTower.setHidden(false);
     }
 
+    private void unstick(){
+
+        if(getPosition().y < getRadius()){
+            getPosition().y = getRadius() + 1;
+        }
+
+        if(getPosition().y > getWorld().getHeight() - getRadius()){
+            getPosition().y = getWorld().getHeight() - getRadius() - 1;
+        }
+
+
+
+        if(getPosition().x < getRadius()){
+            getPosition().x = getRadius() + 1;
+        }
+
+        if(getPosition().x > getWorld().getWidth() - getRadius()){
+            getPosition().x = getWorld().getWidth() - getRadius() - 1;
+        }
+
+    }
+
     @Override
     public void update(float delta) {
         super.update(delta);
@@ -46,5 +67,6 @@ public class TurtleProjectile extends Projectile {
             getVelocity().x *= -1;
         }
 
+        unstick();
     }
 }

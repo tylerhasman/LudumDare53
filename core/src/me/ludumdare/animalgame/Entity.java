@@ -53,6 +53,13 @@ public abstract class Entity {
     }
 
     /**
+     * Render this entity before render, used for shadows
+     */
+    public void preRender(SpriteBatch spriteBatch){
+
+    }
+
+    /**
      * Render this entity
      * @param spriteBatch the spritebatch to use for rendering
      */
