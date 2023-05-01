@@ -78,18 +78,6 @@ public class World {
         return colliding;
     }
 
-    public <T extends Entity> List<T> getEntitiesOfClass(Class<? extends T> entityClass){
-        List<T> found = new ArrayList<>();
-
-        for(Entity entity : entities){
-            if(Utils.isInstanceOf(entityClass, entity)){
-                found.add((T) entity);
-            }
-        }
-
-        return found;
-    }
-
     public void update(float delta){
         //HERE
         entities.addAll(toAdd);
@@ -103,8 +91,8 @@ public class World {
         entities.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
         //HERE DO NOT TOUCH NO EXCEPTIONS
 
-            spawnWaves(delta);
-            spawnEnemy(delta);
+        spawnWaves(delta);
+        spawnEnemy(delta);
     }
 
     private void spawnEnemy(float delta) {

@@ -83,10 +83,17 @@ public class Level {
     }
 
     public boolean isLevelDone() {
-        //if enemy wave is empty && there are no enemies in the world, return true
-        System.out.println(Enemy.class);
-        return ((this.waveList.size() == world.getWaveIndex()) && (world.getEntitiesOfClass(Enemy.class).size() == 0));
 
+        if(world.getWaveIndex() < this.waveList.size())
+            return false;
+
+        for(Entity entity : world.getEntities()){
+            if(entity instanceof Enemy){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
