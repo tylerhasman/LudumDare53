@@ -165,15 +165,18 @@ public class Enemy extends Entity {
             texture = AnimalGame.getTexture(enemyAppearance.walkTextures[currentFrame]);
         }
 
-        final float radius = getRadius();
+        if(texture != null){
+            final float radius = getRadius();
 
-        float damageTime = showDamageTimer / SHOW_DAMAGE_TIME;
+            float damageTime = showDamageTimer / SHOW_DAMAGE_TIME;
 
-        //Fade out the sprite before it dies
-        spriteBatch.setColor(1, 1 - damageTime * 0.5f, 1 - damageTime * 0.5f, deathFade / DEATH_FADE_TIME);
+            //Fade out the sprite before it dies
+            spriteBatch.setColor(1, 1 - damageTime * 0.5f, 1 - damageTime * 0.5f, deathFade / DEATH_FADE_TIME);
 
-        spriteBatch.draw(texture, getPosition().x - radius, getPosition().y - radius, radius * 2, radius * 2);
+            spriteBatch.draw(texture, getPosition().x - radius, getPosition().y - radius, radius * 2, radius * 2);
 
-        spriteBatch.setColor(1, 1, 1, 1f);
+            spriteBatch.setColor(1, 1, 1, 1f);
+        }
+
     }
 }
