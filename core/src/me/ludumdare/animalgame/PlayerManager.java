@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PlayerManager {
-
-    private Shop shop;
     private int health;
     private int score;
     private int money;
@@ -40,12 +38,16 @@ public class PlayerManager {
 
     public void render(SpriteBatch spriteBatch)  {
         BitmapFont font = new BitmapFont();
-        GlyphLayout layout = new GlyphLayout(font, String.valueOf(money));
-        float moneyTextWidth = layout.width;
+        GlyphLayout moneyLayout = new GlyphLayout(font, String.valueOf(money));
+        float moneyTextWidth = moneyLayout.width;
+        GlyphLayout scoreLayout = new GlyphLayout(font, String.valueOf(score));
+        float scoreTextWidth = scoreLayout.width;
 
-        font.draw(spriteBatch, String.valueOf(health), 10, Gdx.graphics.getHeight());
-        font.draw(spriteBatch, String.valueOf(money), Gdx.graphics.getWidth() - moneyTextWidth - 10, Gdx.graphics.getHeight());
-        font.draw(spriteBatch, String.valueOf(score), Gdx.graphics.getWidth() / 2f , Gdx.graphics.getHeight());
+        spriteBatch.draw(AnimalGame.getTexture("heart"), 5, Gdx.graphics.getHeight() - 40, 40, 40);
+        font.draw(spriteBatch, String.valueOf(health), 50, Gdx.graphics.getHeight() - 10);
+        spriteBatch.draw(AnimalGame.getTexture("coin"), Gdx.graphics.getWidth() - 150, 10, 40, 40);
+        font.draw(spriteBatch, String.valueOf(money), Gdx.graphics.getWidth() - moneyTextWidth - 80, 35);
+        font.draw(spriteBatch, String.valueOf(score), Gdx.graphics.getWidth() - 205 - scoreTextWidth , Gdx.graphics.getHeight() - 10);
     }
 
     public void damage(int amount){

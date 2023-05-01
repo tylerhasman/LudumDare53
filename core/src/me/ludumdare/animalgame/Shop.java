@@ -5,14 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import me.ludumdare.animalgame.towers.CatTower;
-import me.ludumdare.animalgame.towers.DogTower;
-import me.ludumdare.animalgame.towers.GuyTower;
-import me.ludumdare.animalgame.towers.TurtleTower;
+import me.ludumdare.animalgame.towers.*;
 
 public class Shop {
     private World world;
-    private Tower[][] towers = new Tower[2][2];
+    private Tower[][] towers = new Tower[2][3];
     //    private List<Tower> towers = new ArrayList<Tower>;
     private BitmapFont font;
     private Tower currClickedTower;
@@ -28,9 +25,9 @@ public class Shop {
 //        towers.add(new DummyTower(world));
         towers[0][0] = new CatTower(world);
         towers[0][1] = new DogTower(world);
+        towers[0][2] = new RabbitTower(world);
         towers[1][0] = new GuyTower(world);
         towers[1][1] = new TurtleTower(world);
-
     }
 
     public void buyTower(Tower tower) {
@@ -48,16 +45,19 @@ public class Shop {
     }
 
     public void render(SpriteBatch spriteBatch) {
+        int towersNumCols = towers.length;
         int towersNumRows = towers[0].length;
-        int towersNumCols = towers[1].length;
 
         BitmapFont font = new BitmapFont();
         final float width = 96, height = 96;
         Rectangle shopBounds = new Rectangle(Gdx.graphics.getWidth() - 200, 0, 200, 800);
         spriteBatch.draw(AnimalGame.getTexture("shop_tray"),Gdx.graphics.getWidth() - 200,0,200,800);
         spriteBatch.draw(AnimalGame.getTexture("brown_2"), Gdx.graphics.getWidth() - 200, 100, 200, Gdx.graphics.getHeight() - 245);
-        for (int i = 0; i < towersNumRows; i++) {
-            for (int j = 0; j < towersNumCols; j++) {
+        for (int i = 0; i < towersNumCols; i++) {
+            for (int j = 0; j < towersNumRows; j++) {
+                if (i == 1 & j == 2) {
+                    break; // no towers at towers[1][2]
+                }
                 Tower tower = towers[i][j];
 
                 tower.setRadius(width);
@@ -87,6 +87,8 @@ public class Shop {
                                 boughtTower = new GuyTower(world);
                             } else if (currClickedTower instanceof TurtleTower) {
                                 boughtTower = new TurtleTower(world);
+                            } else if (currClickedTower instanceof RabbitTower) {
+                                boughtTower = new RabbitTower(world);
                             } else {
                                 Gdx.app.error("Shop", "Clicked a tower that IDK what the fuck it is");
                                 return;
