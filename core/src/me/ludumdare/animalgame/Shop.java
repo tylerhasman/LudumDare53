@@ -2,10 +2,14 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import me.ludumdare.animalgame.towers.*;
+
+import static me.ludumdare.animalgame.AnimalGame.getInstance;
 
 public class Shop {
     private World world;
@@ -31,10 +35,10 @@ public class Shop {
     }
 
     public void buyTower(Tower tower) {
-        int money = AnimalGame.getInstance().getPlayerManager().getMoney();
+        int money = getInstance().getPlayerManager().getMoney();
         if (money >= tower.getPrice()) {
             world.addEntity(tower);
-            AnimalGame.getInstance().getPlayerManager().setMoney(money - tower.getPrice());
+            getInstance().getPlayerManager().setMoney(money - tower.getPrice());
         } else {
             System.out.println("YOU are POOR");
         }
@@ -94,15 +98,35 @@ public class Shop {
                                 return;
                             }
                             boughtTower.getPosition().set(mouseX, mouseY);
-                            buyTower(boughtTower);
-                            towerClicked = false;
-                            currClickedTower = null;
+                            boolean valid = AnimalGame.getInstance().getLevel().isValidTowerPlacement(new Vector2(mouseX, Gdx.input.getY()), boughtTower);
+                            if (valid) {
+                                buyTower(boughtTower);
+                                towerClicked = false;
+                                currClickedTower = null;
+                            }
                         }
                     }
                 }
 
                 if (towerClicked) {
+
+                    Texture invalidMap = AnimalGame.getTexture(AnimalGame.getInstance().getLevel().getInvalidMap());
+
+                    spriteBatch.setColor(0.8f, 0.4f, 0.4f, 0.1f);
+
+                    spriteBatch.draw(invalidMap, 0, 0);
+
+                    spriteBatch.setColor(1, 1, 1, 1);
+
+                    boolean valid = AnimalGame.getInstance().getLevel().isValidTowerPlacement(new Vector2(Gdx.input.getX(), Gdx.input.getY()), currClickedTower);
+                    if (!valid) {
+                        spriteBatch.setColor(1, 0.5f, 0.5f, 1);
+                    }
+
+
+
                     spriteBatch.draw(currClickedTower.getTexture(), Gdx.input.getX() - width / 2, Gdx.graphics.getHeight() - Gdx.input.getY() - height / 2, width, height);
+                    spriteBatch.setColor(1, 1, 1, 1);
                     float range = currClickedTower.getAttackRange();
                     spriteBatch.draw(AnimalGame.getTexture("range"), Gdx.input.getX() - range, Gdx.graphics.getHeight() - Gdx.input.getY() - range, range * 2, range * 2);
                 }

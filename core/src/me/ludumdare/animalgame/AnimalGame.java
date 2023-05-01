@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 public class AnimalGame extends ApplicationAdapter {
 
@@ -23,6 +24,9 @@ public class AnimalGame extends ApplicationAdapter {
 	private Shop shop;
 
 	private PlayerManager playerManager;
+
+	private Level level;
+	private int levelIndex;
 
 	private Map<String, Texture> textures;
 
@@ -53,7 +57,28 @@ public class AnimalGame extends ApplicationAdapter {
 		loadTextures();
 
 		playerManager = new PlayerManager();
-		shop  = new Shop(world);
+		shop = new Shop(world);
+
+		switchLevels(0);
+		setSpawnWaves(this.level.getWaveList());
+
+	}
+
+	private void setSpawnWaves(List<List<Enemy>> _waveList) {
+		this.world.setWaves(_waveList);
+	}
+
+	public void switchLevels(int levelNumber){
+		world = new World();
+
+		this.levelIndex = levelNumber;
+		this.level = Levels.LEVELS[levelNumber];
+		this.level.setWorld(world);
+
+		shop = new Shop(world);
+
+		playerManager.setMoney(15);
+		playerManager.setHealth(100);
 	}
 
 	public static Enemy createEnemy(World world, String name, List<Vector2> path){
@@ -94,6 +119,14 @@ public class AnimalGame extends ApplicationAdapter {
 		return playerManager;
 	}
 
+	public Level getLevel() {
+		return level;
+	}
+
+	public int getLevelIndex() {
+		return levelIndex;
+	}
+
 	@Override
 	public void render () {
 		world.update(Gdx.graphics.getDeltaTime());
@@ -102,7 +135,9 @@ public class AnimalGame extends ApplicationAdapter {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(AnimalGame.getTexture("level1"), 0, 0);
+
+		batch.draw(getTexture(level.getMapTexture()), 0, 0, world.getWidth(), world.getHeight());
+
 		world.render(batch);
 		shop.render(batch);
 		playerManager.render(batch);
@@ -183,6 +218,9 @@ public class AnimalGame extends ApplicationAdapter {
 
 		textures.put("level2", new Texture("images/lvl2.png"));
 		textures.put("level2_invalid", new Texture("images/lvl2invalid.png"));
+
+		textures.put("level3", new Texture("images/lvl3.png"));
+		textures.put("level3_invalid", new Texture("images/lvl3invalid.png"));
 
 		textures.put("shop_tray", new Texture("images/Shop Tray.png"));
 		textures.put("brown_1", new Texture("images/brown1.png"));
