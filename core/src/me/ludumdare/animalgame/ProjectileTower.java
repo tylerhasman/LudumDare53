@@ -8,7 +8,7 @@ public abstract class ProjectileTower extends Tower {
 
     public ProjectileTower(World world, String towerName, String towerTexture, int price) {
         super(world, towerName, towerTexture, price);
-        projectileSpeed = 5f;
+        projectileSpeed = 100f;
     }
 
     public void setProjectileSpeed(float projectileSpeed) {
@@ -22,6 +22,8 @@ public abstract class ProjectileTower extends Tower {
         Vector2 direction = enemy.getPosition().cpy().sub(getPosition()).nor();
 
         Projectile projectile = createProjectile();
+
+        projectile.getPosition().set(getPosition());
 
         projectile.setVelocity(direction.scl(projectileSpeed));
 
