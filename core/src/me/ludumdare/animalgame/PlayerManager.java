@@ -11,6 +11,8 @@ public class PlayerManager {
     private int score;
     private int money;
 
+    private boolean isLevelDone = false;
+
     public PlayerManager() {
         money = 15;
         score = 0;
@@ -43,12 +45,17 @@ public class PlayerManager {
         font.draw(spriteBatch, String.valueOf(money), Gdx.graphics.getWidth() - moneyTextWidth - 80, 35);
         font.draw(spriteBatch, String.valueOf(score), Gdx.graphics.getWidth() - 205 - scoreTextWidth , Gdx.graphics.getHeight() - 10);
 
-/*        boolean levelDone = AnimalGame.getInstance().getLevel().isLevelDone();
-        if (levelDone) {
+        isLevelDone = AnimalGame.getInstance().getLevel().isLevelDone();
+        if (isLevelDone & AnimalGame.getInstance().getLevelIndex() < 2) {
+            isLevelDone = false;
             AnimalGame.getInstance().switchLevels(AnimalGame.getInstance().getLevelIndex() + 1);
-        }*/
+        } else if (isLevelDone & AnimalGame.getInstance().getLevelIndex() == 2) {
+            isLevelDone = false;
+            spriteBatch.draw(AnimalGame.getTexture("sign"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
 
         if (health <= 0) {
+            score = 0;
             AnimalGame.getInstance().switchLevels(0);
         }
     }
