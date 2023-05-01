@@ -21,6 +21,7 @@ public class AnimalGame extends ApplicationAdapter {
 	private Shop shop;
 
 	private PlayerManager playerManager;
+	private Level level;
 
 	private Map<String, Texture> textures;
 
@@ -146,6 +147,9 @@ public class AnimalGame extends ApplicationAdapter {
 
 		textures.put("level2", new Texture("images/lvl2.png"));
 		textures.put("level2_invalid", new Texture("images/lvl2invalid.png"));
+
+		textures.put("level3", new Texture("images/lvl3.png"));
+		textures.put("level3_invalid", new Texture("images/lvl3invalid.png"));
 
 		textures.put("shop_tray", new Texture("images/Shop Tray.png"));
 		textures.put("brown_1", new Texture("images/brown1.png"));

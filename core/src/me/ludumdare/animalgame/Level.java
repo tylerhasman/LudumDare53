@@ -6,14 +6,17 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public abstract class Level {
+public class Level {
     private World world;
     private List<Vector2> pathPoints; //coords for pathing, including spawnPoint or goalPoint
     private String mapTexture; //level map
     private String invalidMap; //map for checking tower placements
     private List<List<Enemy>> waveList; //list of list of enemies (waves)
-    private final float spawnTimer = 3.0F; //number of seconds to wait to spawn wave after spawning previous wave
+    private final int spawnTimer = 3000; //number of ms to wait to spawn wave after spawning previous wave
+    private final int spawnDelay = 1000; //number of ms to wait between enemy spawns in same wave
     public Level(World _world, List<Vector2> _pathPoints, String _mapTexture, String _invalidMap, List<List<Enemy>> _waveList) {
         this.world = _world;
         this.pathPoints = _pathPoints;
@@ -23,16 +26,26 @@ public abstract class Level {
     }
 
     private void spawnNextWave(List<List<Enemy>> _waveList) {
-        //TODO
-        // put this in an update function?
-        if (_waveList.size() > 0) {
-            //wait for spawnTimer
-            spawnWave(_waveList.remove(0));
+        //TODO: put this in an update function?
+        if ((_waveList.size() > 0) && (_waveList != null)) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    spawnWave(_waveList.remove(0));
+                }
+            }, spawnTimer);
         }
     }
     private void spawnWave(List<Enemy> wave) {
         //TODO
-        //spawns wave at pathPoints[0]
+        for (Enemy enemy: wave) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    //spawn enemy at pathPoints[0] via enemy.render?
+                }
+            }, spawnDelay);
+        }
     }
     public boolean isValidTowerPlacement(Vector2 cursorPosition, Tower tower) {
         //if pixel on invalidMap is blocked, return false;
