@@ -9,6 +9,8 @@ import java.util.List;
 public class Enemy extends Entity {
 
     private static final float DEATH_FADE_TIME = 1f;
+    private static final float SHOW_DAMAGE_TIME = 0.35f;
+
 
     private int health;
 
@@ -31,19 +33,22 @@ public class Enemy extends Entity {
 
     private float deathFade;
 
+    private float showDamageTimer;
+
     public Enemy(World world, int health, int value, EnemyAppearance enemyAppearance, List<Vector2> path) {
         super(world);
         this.health = health;
         this.path = path;
         this.value= value;
         currentPathIndex = 0;
-        speed = 10;
+        speed = 40;
         damage = 1;
         this.enemyAppearance = enemyAppearance;
         currentFrame = 0;
         frameSpeed = 0.5f;
         frameTimer = frameSpeed;
         deathFade = DEATH_FADE_TIME;
+        showDamageTimer = 0;
     }
 
     public void setDamage(int damage) {
@@ -56,6 +61,7 @@ public class Enemy extends Entity {
 
     public void damage(int amount){
         health = Math.max(health - amount, 0);
+        showDamageTimer = SHOW_DAMAGE_TIME;
     }
 
     public boolean isDead(){
@@ -115,6 +121,11 @@ public class Enemy extends Entity {
             }
         }
 
+        showDamageTimer -= delta;
+        if(showDamageTimer <= 0){
+            showDamageTimer = 0f;
+        }
+
     }
 
     @Override
@@ -131,8 +142,10 @@ public class Enemy extends Entity {
 
         final float radius = getRadius();
 
+        float damageTime = showDamageTimer / SHOW_DAMAGE_TIME;
+
         //Fade out the sprite before it dies
-        spriteBatch.setColor(1, 1, 1, deathFade / DEATH_FADE_TIME);
+        spriteBatch.setColor(1, 1 - damageTime * 0.5f, 1 - damageTime * 0.5f, deathFade / DEATH_FADE_TIME);
 
         spriteBatch.draw(texture, getPosition().x - radius, getPosition().y - radius, radius * 2, radius * 2);
 
