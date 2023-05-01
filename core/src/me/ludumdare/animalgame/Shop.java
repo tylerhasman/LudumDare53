@@ -87,7 +87,7 @@ public class Shop {
                                 Gdx.app.error("Shop", "Clicked a tower that IDK what the fuck it is");
                                 return;
                             }
-                            boughtTower.getPosition().set(mouseX + 32, mouseY + 32);
+                            boughtTower.getPosition().set(mouseX, mouseY);
                             buyTower(boughtTower);
                             towerClicked = false;
                             currClickedTower = null;

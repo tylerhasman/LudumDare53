@@ -19,7 +19,7 @@ public abstract class Tower extends Entity {
     public Tower(World world, String towerName, String towerTexture, int price) {
         super(world);
         attackSpeed = 1f;
-        attackRange = 5f;
+        attackRange = 200f;
         attackTimer = 0f;
         this.price  = price;
         this.towerName = towerName;

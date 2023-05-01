@@ -37,7 +37,7 @@ public class Enemy extends Entity {
         this.path = path;
         this.value= value;
         currentPathIndex = 0;
-        speed = 1;
+        speed = 10;
         damage = 1;
         this.enemyAppearance = enemyAppearance;
         currentFrame = 0;
