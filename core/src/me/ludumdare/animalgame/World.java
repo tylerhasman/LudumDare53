@@ -22,11 +22,6 @@ public class World {
         toAdd = new ArrayList<>();
     }
 
-    public boolean isTowerPlaceable(Vector2 position, float towerSize){
-        //TODO: IMPLEMENT
-        return true;
-    }
-
     //not good to hardcode ths but whatever losers
     public float getWidth(){
         return 1280;
