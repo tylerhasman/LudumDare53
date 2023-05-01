@@ -20,13 +20,16 @@ public class World {
     private float spawnEnemyTimer;
     private float spawnWaveTimer;
 
+    private int waveIndex;
+
     //END DEBUG
 
     public World(){
         entities = new ArrayList<>();
         toAdd = new ArrayList<>();
-        enemyWaves = AnimalGame.getInstance().getLevel().getWaveList();
+        enemyWaves = new ArrayList<>();
         toAddEnemies = new ArrayList<>();
+        waveIndex = 0;
     }
 
     //not good to hardcode ths but whatever losers
@@ -36,6 +39,10 @@ public class World {
 
     public float getHeight(){
         return 800;
+    }
+
+    public int getWaveIndex() {
+        return waveIndex;
     }
 
     public void setWaves(List<List<String>> _enemyWaves) {
@@ -96,8 +103,8 @@ public class World {
         entities.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
         //HERE DO NOT TOUCH NO EXCEPTIONS
 
-        spawnWaves(delta);
-        spawnEnemy(delta);
+            spawnWaves(delta);
+            spawnEnemy(delta);
     }
 
     private void spawnEnemy(float delta) {
@@ -118,8 +125,9 @@ public class World {
         spawnWaveTimer -= delta;
         if (spawnWaveTimer <= 0) {
             spawnWaveTimer = WAVETIMER;
-            if (!enemyWaves.isEmpty()) {
-                toAddEnemies.addAll(enemyWaves.remove(0));
+            if (waveIndex < enemyWaves.size()) {
+                toAddEnemies.addAll(enemyWaves.get(waveIndex));
+                waveIndex += 1;
             }
         }
     }

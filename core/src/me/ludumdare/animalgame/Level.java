@@ -84,7 +84,9 @@ public class Level {
 
     public boolean isLevelDone() {
         //if enemy wave is empty && there are no enemies in the world, return true
-        return ((this.waveList.size() == 0) && (world.getEntitiesOfClass(Enemy.class).size() == 0));
+        System.out.println(Enemy.class);
+        return ((this.waveList.size() == world.getWaveIndex()) && (world.getEntitiesOfClass(Enemy.class).size() == 0));
+
     }
 
 }

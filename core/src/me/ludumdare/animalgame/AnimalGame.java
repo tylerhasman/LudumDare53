@@ -48,7 +48,7 @@ public class AnimalGame extends ApplicationAdapter {
 
 		enemyData = new HashMap<>();
 
-		enemyData.put("azazon", new EnemyData(50, 10, new EnemyAppearance(new String[] {"azazon_walk_1", "azazon_walk_2"}, "azazon_death"), 20, 40, "mail_man", 3));
+		enemyData.put("azazon", new EnemyData(50, 10, new EnemyAppearance(new String[] {"azazon_walk_1", "azazon_walk_2"}, "azazon_death"), 20, 200, "mail_man", 3));
 		enemyData.put("mail_man", new EnemyData(5, 3, new EnemyAppearance(new String[] {"mailman_walk_1", "mailman_walk_2"}, "mailman_death"), 5, 60, "pigeon", 3));
 		enemyData.put("santa", new EnemyData(100, 30, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), 20, 25, "azazon", 3));
 		enemyData.put("stork", new EnemyData(25, 5, new EnemyAppearance(new String[] {"stork_walk_1", "stork_walk_2"}, "santa_death"), 5, 45, "azazon", 3));
@@ -74,6 +74,8 @@ public class AnimalGame extends ApplicationAdapter {
 		this.levelIndex = levelNumber;
 		this.level = Levels.LEVELS[levelNumber];
 		this.level.setWorld(world);
+		world.setWaves(level.getWaveList());
+
 
 		shop = new Shop(world);
 
@@ -229,6 +231,8 @@ public class AnimalGame extends ApplicationAdapter {
 		textures.put("range", new Texture("images/range.png"));
 		textures.put("heart", new Texture("images/heart0.png"));
 		textures.put("coin", new Texture("images/coin.png"));
+
+		textures.put("sign", new Texture("images/signpost.png"));
 
 	}
 }
