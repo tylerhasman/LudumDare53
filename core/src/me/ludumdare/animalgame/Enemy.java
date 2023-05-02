@@ -144,6 +144,7 @@ public class Enemy extends Entity {
                         }
                     }
                 }
+                AnimalGame.playSound("death", 0.05f);
 
             }
             deathFade -= delta;
