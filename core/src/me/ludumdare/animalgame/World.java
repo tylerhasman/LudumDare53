@@ -16,7 +16,7 @@ public class World {
     //DEBUG
 
     private final float SPAWNTIMER = 0.8f;
-    private final float WAVETIMER = 6.0f;
+    private final float WAVETIMER = 4.0f;
     private float spawnEnemyTimer;
     private float spawnWaveTimer;
 
@@ -140,15 +140,19 @@ public class World {
     }
 
     private void spawnWaves(float delta) {
-        //after the timer is up, put a new wave into the toAddEnemies list to queue to be spawned
-        spawnWaveTimer -= delta;
-        if (spawnWaveTimer <= 0) {
-            spawnWaveTimer = WAVETIMER;
-            if (waveIndex < enemyWaves.size()) {
-                toAddEnemies.addAll(enemyWaves.get(waveIndex));
-                waveIndex += 1;
+
+        if(toAddEnemies.size() == 0){
+            //after the timer is up, put a new wave into the toAddEnemies list to queue to be spawned
+            spawnWaveTimer -= delta;
+            if (spawnWaveTimer <= 0) {
+                spawnWaveTimer = WAVETIMER;
+                if (waveIndex < enemyWaves.size()) {
+                    toAddEnemies.addAll(enemyWaves.get(waveIndex));
+                    waveIndex += 1;
+                }
             }
         }
+
     }
 
 /*    private void spawnEntity(float delta) {
