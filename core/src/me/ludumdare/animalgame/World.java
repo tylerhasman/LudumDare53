@@ -133,6 +133,9 @@ public class World {
                     addEntity(enemy);
                 }
             }
+            AnimalGame.playMusic("level1");
+        }else{
+            AnimalGame.playMusic("waiting");
         }
     }
 

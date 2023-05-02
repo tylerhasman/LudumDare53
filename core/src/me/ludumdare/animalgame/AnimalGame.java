@@ -2,6 +2,8 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +32,11 @@ public class AnimalGame extends ApplicationAdapter {
 
 	private Map<String, Texture> textures;
 
+	private Map<String, Sound> sounds;
+
+	private Map<String, Music> music;
+	private static String currentMusic = null;
+
 	private Map<String, EnemyData> enemyData;
 
 	private OrthographicCamera camera;
@@ -39,7 +46,10 @@ public class AnimalGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		world = new World();
 		textures = new HashMap<>();
+		music = new HashMap<>();
 		instance = this;
+
+		sounds = new HashMap<>();
 
 		enemyData = new HashMap<>();
 
@@ -59,9 +69,38 @@ public class AnimalGame extends ApplicationAdapter {
 		playerManager = new PlayerManager();
 		shop = new Shop(world);
 
+		sounds.put("hit", Gdx.audio.newSound(Gdx.files.internal("sounds/hit.mp3")));
+		sounds.put("shoot", Gdx.audio.newSound(Gdx.files.internal("sounds/shoot.wav")));
+		sounds.put("gameover", Gdx.audio.newSound(Gdx.files.internal("sounds/gameover.wav")));
+		sounds.put("death", Gdx.audio.newSound(Gdx.files.internal("sounds/die.mp3")));
+
+		music.put("waiting", Gdx.audio.newMusic(Gdx.files.internal("music/waiting.wav")));
+		music.put("level1", Gdx.audio.newMusic(Gdx.files.internal("music/level1.wav")));
+
 		switchLevels(0);
 //		setSpawnWaves(this.level.getWaveList());
 
+	}
+
+	public static void playMusic(String name){
+
+		if (name.equals(currentMusic)) {
+			return;
+		}
+
+		for(Music music : instance.music.values()){
+			music.stop();
+		}
+
+		instance.music.get(name).setLooping(true);
+		instance.music.get(name).setVolume(0.02f);
+		instance.music.get(name).play();
+
+		currentMusic = name;
+	}
+
+	public static void playSound(String name, float volume){
+		instance.sounds.get(name).play(volume);
 	}
 
 	private void setSpawnWaves(List<List<String>> _waveList) {

@@ -126,6 +126,7 @@ public abstract class Tower extends Entity {
                     if(entity.getPosition().dst2(getPosition()) <= attackRange * attackRange){
                         changeAnimationState(ANIMATION_STATE_ATTACKING, attackSpeed / 4f);
                         attack(enemy);
+                        AnimalGame.playSound("shoot", 0.15f);
                         attackTimer = attackSpeed;
                         break;
                     }
