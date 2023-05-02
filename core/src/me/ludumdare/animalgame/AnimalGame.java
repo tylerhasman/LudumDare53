@@ -76,8 +76,6 @@ public class AnimalGame extends ApplicationAdapter {
 
 		music.put("waiting", Gdx.audio.newMusic(Gdx.files.internal("music/waiting.wav")));
 		music.put("level1", Gdx.audio.newMusic(Gdx.files.internal("music/level1.wav")));
-		music.put("level2", Gdx.audio.newMusic(Gdx.files.internal("music/level2.wav")));
-		music.put("level3", Gdx.audio.newMusic(Gdx.files.internal("music/level3.wav")));
 
 		switchLevels(0);
 //		setSpawnWaves(this.level.getWaveList());
