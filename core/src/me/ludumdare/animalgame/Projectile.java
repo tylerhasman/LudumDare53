@@ -11,13 +11,15 @@ public class Projectile extends Entity{
 
     private final Vector2 velocity;
     private float hitboxRadius;
-    private int damage;
+    private float damage;
 
     private String texture;
 
     private boolean removeOnDamage;
 
     private List<Enemy> inside;
+
+    private float life;
 
     public Projectile(World world, String texture) {
         super(world);
@@ -27,9 +29,14 @@ public class Projectile extends Entity{
         this.texture = texture;
         removeOnDamage = true;
         inside = new ArrayList<>();
+        life = 10f;
     }
 
-    public void setDamage(int damage) {
+    public void setLife(float life) {
+        this.life = life;
+    }
+
+    public void setDamage(float damage) {
         this.damage = damage;
     }
 
@@ -49,15 +56,25 @@ public class Projectile extends Entity{
     public void update(float delta) {
         super.update(delta);
 
+        life -= delta;
+        if(life <= 0f){
+            remove();
+        }
+
         getPosition().add(velocity.x * delta, velocity.y * delta);
 
-        inside.removeIf(enemy -> enemy.getPosition().dst2(getPosition()) > (getRadius() + hitboxRadius) * (getRadius() + hitboxRadius));
+        inside.removeIf(enemy -> enemy.getPosition().dst2(getPosition()) > (getRadius() + hitboxRadius + enemy.getRadius()) * (getRadius() + hitboxRadius + enemy.getRadius()));
 
         List<Entity> nearbyEntities = getWorld().getCollidingEntities(getPosition(), getRadius() + hitboxRadius);
 
         for(Entity nearby : nearbyEntities){
             if(nearby instanceof Enemy){
                 Enemy enemy = (Enemy) nearby;
+
+                if(enemy.isDead()){
+                    continue;
+                }
+
                 //Prevents things from the turtle shell from double hitting something until it leaves it
                 if(inside.contains(enemy)){
                     continue;

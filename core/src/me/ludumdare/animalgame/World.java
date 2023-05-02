@@ -78,18 +78,6 @@ public class World {
         return colliding;
     }
 
-    public <T extends Entity> List<T> getEntitiesOfClass(Class<? extends T> entityClass){
-        List<T> found = new ArrayList<>();
-
-        for(Entity entity : entities){
-            if(Utils.isInstanceOf(entityClass, entity)){
-                found.add((T) entity);
-            }
-        }
-
-        return found;
-    }
-
     public void update(float delta){
         //HERE
         entities.addAll(toAdd);
@@ -100,22 +88,50 @@ public class World {
         }
 
         entities.removeIf(Entity::isRemoved);
-        entities.sort((e1, e2) -> Float.compare(e2.getPosition().y, e1.getPosition().y));
+        entities.sort((e1, e2) -> {
+
+            if(e1 instanceof Projectile && e2 instanceof Projectile){
+                return 0;
+            }
+
+            if(e1 instanceof Projectile){
+                return 1;
+            }
+
+            if(e2 instanceof Projectile){
+                return -1;
+            }
+
+            return Float.compare(e2.getPosition().y, e1.getPosition().y);
+
+        });
         //HERE DO NOT TOUCH NO EXCEPTIONS
 
-            spawnWaves(delta);
-            spawnEnemy(delta);
+        spawnWaves(delta);
+        spawnEnemy(delta);
     }
 
     private void spawnEnemy(float delta) {
-        spawnEnemyTimer -= delta;
-        if(spawnEnemyTimer <= 0){
-            spawnEnemyTimer = SPAWNTIMER;
-            if (!toAddEnemies.isEmpty()) {
-                List<Vector2> path = AnimalGame.getInstance().getLevel().getPathPoints();
-                Enemy enemy = AnimalGame.createEnemy(this, toAddEnemies.remove(0), path);
-                enemy.getPosition().set(path.get(0));
-                addEntity(enemy);
+
+        boolean hasTower = false;
+
+        for(Entity entity : entities){
+            if(entity instanceof Tower){
+                hasTower = true;
+                break;
+            }
+        }
+
+        if(hasTower){
+            spawnEnemyTimer -= delta;
+            if(spawnEnemyTimer <= 0){
+                spawnEnemyTimer = SPAWNTIMER;
+                if (!toAddEnemies.isEmpty()) {
+                    List<Vector2> path = AnimalGame.getInstance().getLevel().getPathPoints();
+                    Enemy enemy = AnimalGame.createEnemy(this, toAddEnemies.remove(0), path);
+                    enemy.getPosition().set(path.get(0));
+                    addEntity(enemy);
+                }
             }
         }
     }

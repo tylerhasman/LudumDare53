@@ -2,6 +2,7 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -68,12 +69,21 @@ public class Shop {
 
                 Rectangle towerBounds = new Rectangle(Gdx.graphics.getWidth() - (2 - i) * width + 5, Gdx.graphics.getHeight() - (j+1) * height - 150 - 5, width, height);
 
+                if(AnimalGame.getInstance().getPlayerManager().getMoney() < tower.getPrice()){
+                    font.setColor(Color.RED);
+                    spriteBatch.setColor(0.8f, 0.2f, 0.2f, 1f);
+                }
+
                 spriteBatch.draw(AnimalGame.getTexture("brown_1"), Gdx.graphics.getWidth() - (2 - i) * width, Gdx.graphics.getHeight() - (j+1) * height - 150, width-4, height-4);
                 spriteBatch.draw(tower.getTexture(), Gdx.graphics.getWidth() - (2 - i) * width, Gdx.graphics.getHeight() - (j+1) * height - 150, width, height);
+
+                spriteBatch.setColor(1, 1, 1, 1);
+
+
                 font.draw(spriteBatch, String.valueOf(tower.getPrice()), Gdx.graphics.getWidth() - (2 - i) * width + 5, 20 + Gdx.graphics.getHeight() - (j+1) * height - 150);
+                font.setColor(Color.WHITE);
 
-
-                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && AnimalGame.getInstance().getPlayerManager().getMoney() >= tower.getPrice()) {
                     int mouseX = Gdx.input.getX();
                     int mouseY = Gdx.graphics.getHeight() - Gdx.input.getY();
 

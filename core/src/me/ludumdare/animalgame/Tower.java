@@ -120,6 +120,9 @@ public abstract class Tower extends Entity {
             for(Entity entity : nearby){
                 if(entity instanceof Enemy){
                     Enemy enemy = (Enemy) entity;
+                    if(enemy.isDead()){
+                        continue;
+                    }
                     if(entity.getPosition().dst2(getPosition()) <= attackRange * attackRange){
                         changeAnimationState(ANIMATION_STATE_ATTACKING, attackSpeed / 4f);
                         attack(enemy);
