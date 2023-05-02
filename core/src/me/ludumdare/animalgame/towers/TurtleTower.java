@@ -13,9 +13,9 @@ public class TurtleTower extends ProjectileTower {
     private boolean hidden;
 
     public TurtleTower(World world) {
-        super(world, "Turtle", APPEARANCE, 50);
+        super(world, APPEARANCE, 200);
         setProjectileSpeed(400f);
-        setAttackRange(1000);
+        setAttackRange(600f);
         setAttackSpeed(5);
     }
 

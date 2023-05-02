@@ -13,7 +13,7 @@ public class Enemy extends Entity {
     private static final float SHOW_DAMAGE_TIME = 0.35f;
 
 
-    private int health;
+    private float health;
 
     //Note: Do not modify this list's contents
     private final List<Vector2> path;
@@ -45,7 +45,7 @@ public class Enemy extends Entity {
         super(world);
         this.health = health;
         this.path = path;
-        this.value= value;
+        this.value = value;
         currentPathIndex = 0;
         speed = 40;
         damage = 1;
@@ -74,7 +74,7 @@ public class Enemy extends Entity {
         this.speed = speed;
     }
 
-    public void damage(int amount){
+    public void damage(float amount){
         health = Math.max(health - amount, 0);
         showDamageTimer = SHOW_DAMAGE_TIME;
     }

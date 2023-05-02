@@ -48,9 +48,9 @@ public class AnimalGame extends ApplicationAdapter {
 
 		enemyData = new HashMap<>();
 
-		enemyData.put("azazon", new EnemyData(50, 10, new EnemyAppearance(new String[] {"azazon_walk_1", "azazon_walk_2"}, "azazon_death"), 20, 200, "mail_man", 3));
+		enemyData.put("azazon", new EnemyData(50, 10, new EnemyAppearance(new String[] {"azazon_walk_1", "azazon_walk_2"}, "azazon_death"), 20, 40, "mail_man", 3));
 		enemyData.put("mail_man", new EnemyData(5, 3, new EnemyAppearance(new String[] {"mailman_walk_1", "mailman_walk_2"}, "mailman_death"), 5, 60, "pigeon", 3));
-		enemyData.put("santa", new EnemyData(100, 30, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), 20, 25, "azazon", 3));
+		enemyData.put("santa", new EnemyData(100, 30, new EnemyAppearance(new String[] {"santa_walk_1", "santa_walk_2"}, "santa_death"), 20, 25, "stork", 3));
 		enemyData.put("stork", new EnemyData(25, 5, new EnemyAppearance(new String[] {"stork_walk_1", "stork_walk_2"}, "stork_death"), 5, 45, "azazon", 3));
 		enemyData.put("pigeon", new EnemyData(1, 1, new EnemyAppearance(new String[] {"pigeon_walk_1", "pigeon_walk_2"}, "pigeon_death"), 1, 120, "", 0));
 
@@ -72,14 +72,14 @@ public class AnimalGame extends ApplicationAdapter {
 		world = new World();
 
 		this.levelIndex = levelNumber;
-		this.level = Levels.LEVELS[levelNumber];
+		this.level = Levels.LEVELS.get(levelNumber);
 		this.level.setWorld(world);
 		world.setWaves(level.getWaveList());
 
 
 		shop = new Shop(world);
 
-		playerManager.setMoney(1500);
+		playerManager.setMoney(30);
 		playerManager.setHealth(100);
 	}
 

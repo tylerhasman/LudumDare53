@@ -11,7 +11,9 @@ public class DogTower extends ProjectileTower {
             new TowerAppearance(new String[] {"dog_idle_0", "dog_idle_1"}, new String[] {"dog_attack_0", "dog_attack_1"});
 
     public DogTower(World world) {
-        super(world, "Dog", APPEARANCE, 15);
+        super(world, APPEARANCE, 15);
+        setAttackSpeed(0.5f);
+        setProjectileSpeed(550f);
     }
 
     @Override

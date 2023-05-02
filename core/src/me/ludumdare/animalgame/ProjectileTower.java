@@ -6,13 +6,17 @@ public abstract class ProjectileTower extends Tower {
 
     private float projectileSpeed;
 
-    public ProjectileTower(World world, String towerName, TowerAppearance appearance, int price) {
+    public ProjectileTower(World world, TowerAppearance appearance, int price) {
         super(world, appearance, price);
         projectileSpeed = 300f;
     }
 
     public void setProjectileSpeed(float projectileSpeed) {
         this.projectileSpeed = projectileSpeed;
+    }
+
+    public float getProjectileSpeed() {
+        return projectileSpeed;
     }
 
     public abstract Projectile createProjectile();

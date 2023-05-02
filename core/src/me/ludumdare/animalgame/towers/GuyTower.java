@@ -1,9 +1,6 @@
 package me.ludumdare.animalgame.towers;
 
-import me.ludumdare.animalgame.Projectile;
-import me.ludumdare.animalgame.ProjectileTower;
-import me.ludumdare.animalgame.TowerAppearance;
-import me.ludumdare.animalgame.World;
+import me.ludumdare.animalgame.*;
 
 public class GuyTower extends ProjectileTower {
 
@@ -13,14 +10,16 @@ public class GuyTower extends ProjectileTower {
 
 
     public GuyTower(World world) {
-        super(world, "Old Man", APPEARANCE, 30);
+        super(world, APPEARANCE, 100);
+        setAttackSpeed(0.05f);
+        setAttackRange(650f);
     }
 
     @Override
     public Projectile createProjectile() {
         Projectile projectile = new Projectile(getWorld(), "bullet");
 
-        projectile.setDamage(1);
+        projectile.setDamage(0.2f);
         projectile.setRadius(16);
 
         return projectile;
