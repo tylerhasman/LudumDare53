@@ -2,6 +2,7 @@ package me.ludumdare.animalgame;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +31,8 @@ public class AnimalGame extends ApplicationAdapter {
 
 	private Map<String, Texture> textures;
 
+	private Map<String, Sound> sounds;
+
 	private Map<String, EnemyData> enemyData;
 
 	private OrthographicCamera camera;
@@ -40,6 +43,8 @@ public class AnimalGame extends ApplicationAdapter {
 		world = new World();
 		textures = new HashMap<>();
 		instance = this;
+
+		sounds = new HashMap<>();
 
 		enemyData = new HashMap<>();
 
@@ -59,9 +64,17 @@ public class AnimalGame extends ApplicationAdapter {
 		playerManager = new PlayerManager();
 		shop = new Shop(world);
 
+		sounds.put("hit", Gdx.audio.newSound(Gdx.files.internal("sounds/hit.mp3")));
+		sounds.put("shoot", Gdx.audio.newSound(Gdx.files.internal("sounds/shoot.wav")));
+		sounds.put("gameover", Gdx.audio.newSound(Gdx.files.internal("sounds/gameover.wav")));
+
 		switchLevels(0);
 //		setSpawnWaves(this.level.getWaveList());
 
+	}
+
+	public static void playSound(String name, float volume){
+		instance.sounds.get(name).play(volume);
 	}
 
 	private void setSpawnWaves(List<List<String>> _waveList) {

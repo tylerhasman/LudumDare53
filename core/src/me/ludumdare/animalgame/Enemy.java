@@ -77,6 +77,7 @@ public class Enemy extends Entity {
     public void damage(float amount){
         health = Math.max(health - amount, 0);
         showDamageTimer = SHOW_DAMAGE_TIME;
+        AnimalGame.playSound("hit", 0.03f);
     }
 
     public boolean isDead(){
