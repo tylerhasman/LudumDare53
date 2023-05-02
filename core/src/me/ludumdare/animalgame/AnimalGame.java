@@ -274,6 +274,7 @@ public class AnimalGame extends ApplicationAdapter {
 		textures.put("coin", new Texture("images/coin.png"));
 
 		textures.put("sign", new Texture("images/signpost.png"));
+		textures.put("black", new Texture("images/black.png"));
 
 	}
 }
