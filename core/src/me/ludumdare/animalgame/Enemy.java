@@ -125,6 +125,10 @@ public class Enemy extends Entity {
     public void update(float delta) {
         super.update(delta);
 
+        if(AnimalGame.getInstance().getPlayerManager().getHealth() <= 0){
+            return;
+        }
+
         if(!isDead()){
             doPathing(delta);
             doAnimations(delta);

@@ -110,6 +110,10 @@ public abstract class Tower extends Entity {
     public void update(float delta) {
         super.update(delta);
 
+        if(AnimalGame.getInstance().getPlayerManager().getHealth() <= 0){
+            return;
+        }
+
         attackTimer -= delta;
 
         if(attackTimer <= 0){
